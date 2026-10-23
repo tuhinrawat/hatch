@@ -85,6 +85,13 @@
   .btn.small { padding: 8px 16px; font-size: 14px; }
   .btn.ghost { background: transparent; border: 1px solid var(--line); box-shadow: none; }
 
+  .whats-new {
+    display: table; margin: 0 auto 14px; padding: 6px 14px; border-radius: 999px;
+    font-size: 13px; font-weight: 600; text-decoration: none; color: #ffb199;
+    background: rgba(255,122,89,0.1); border: 1px solid rgba(255,122,89,0.3);
+  }
+  .whats-new:hover { background: rgba(255,122,89,0.18); }
+
   /* Hero */
   header.hero { position: relative; padding: 96px 0 64px; text-align: center; overflow: hidden; }
   header.hero::before {
@@ -314,6 +321,7 @@
       <a href="#features">Features</a>
       <a href="#install">Install</a>
       <a href="#safety">Safety</a>
+      <a href="/releases">What's New</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </div>
@@ -323,6 +331,7 @@
 
 <header class="hero">
   <div class="wrap">
+    <a class="whats-new" href="/releases">What's new in <!--version-->0.9.3<!--/version--> <span aria-hidden="true">→</span></a>
     <span class="eyebrow">Free early access · macOS 14+ · Apple silicon</span>
     <h1>Your notch,<br><span class="grad">put to work.</span></h1>
     <p class="lede">Hatch hides in your MacBook's notch and opens into your music, meetings, to-dos and files the moment you need them, then tucks itself away again.</p>
@@ -333,7 +342,7 @@
     <p class="fine">No account, no subscription. Free until Hatch 1.0 launches, then $4.99 once.</p>
     <a class="vt-badge" href="https://www.virustotal.com/gui/file/57664bd52eb560ed6c03896921d37b94318a5d12150114a25aac853b97a797d9">
       <span class="vt-check" aria-hidden="true">✓</span>
-      <span><strong><!--vtscore-->0/56<!--/vtscore--></strong> antivirus engines flagged Hatch on VirusTotal</span>
+      <span><strong><!--vtscore-->0/61<!--/vtscore--></strong> antivirus engines flagged Hatch on VirusTotal</span>
       <span class="vt-link">View report →</span>
     </a>
 
@@ -574,6 +583,7 @@
     <span>© 2026 Hatch. Made in India.</span>
     <span class="footer-links">
       <a href="/privacy">Privacy</a>
+      <a href="/releases">What's New</a>
       <a href="/feedback">Send feedback</a>
       <a href="https://github.com/tuhinrawat/hatch/releases">All releases &amp; release notes</a>
     </span>

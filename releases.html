@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What's New · Hatch</title>
+<meta name="description" content="Every Hatch release and what it means for you: automatic updates, live lyrics, one-click meeting joins, reminders you can't miss, and more.">
+<meta property="og:title" content="What's New in Hatch">
+<meta property="og:description" content="Every Hatch release and what it means for you.">
+<meta property="og:image" content="https://www.myhatch.dev/images/hero.jpg">
+<link rel="canonical" href="https://www.myhatch.dev/releases">
+<link rel="icon" type="image/png" href="favicon.png">
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<style>
+  :root {
+    --bg: #07070b; --panel: #111118; --line: rgba(255,255,255,0.08);
+    --text: #f4f4f7; --muted: #a1a1b0; --faint: #6c6c7c;
+    --accent: #ff7a59; --accent-2: #c058ff; --radius: 22px;
+    --new: #7ee2a0; --improved: #8fb8ff; --security: #ffcf6b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { width: min(880px, 100% - 32px); margin: 0 auto; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(16px) saturate(1.4); background: rgba(7,7,11,0.72);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; gap: 24px; height: 64px; width: min(1120px, 100% - 32px); }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; text-decoration: none; }
+  .brand img { width: 30px; height: 30px; }
+  nav .links { display: flex; gap: 24px; margin-left: auto; font-size: 14px; color: var(--muted); }
+  nav .links a { text-decoration: none; }
+  nav .links a:hover, nav .links a[aria-current] { color: var(--text); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px;
+    font-weight: 600; font-size: 15px; text-decoration: none; color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 10px 30px -10px rgba(255,122,89,0.6);
+  }
+  .btn.small { padding: 8px 16px; font-size: 14px; }
+
+  header.page { position: relative; padding: 80px 0 40px; text-align: center; overflow: hidden; }
+  header.page::before {
+    content: ""; position: absolute; inset: -60% -10% auto; height: 600px; z-index: -1;
+    background: radial-gradient(closest-side, rgba(192,88,255,0.25), transparent 70%),
+                radial-gradient(closest-side at 70% 40%, rgba(255,122,89,0.2), transparent 70%);
+  }
+  h1 { font-size: clamp(40px, 7vw, 64px); line-height: 1.05; letter-spacing: -0.035em; margin: 0 0 14px; }
+  .grad {
+    background: linear-gradient(135deg, #ffb199, var(--accent) 40%, var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lede { font-size: 19px; color: var(--muted); max-width: 600px; margin: 0 auto; }
+
+  main { padding: 24px 0 96px; }
+  .release {
+    display: grid; grid-template-columns: 170px 1fr; gap: 32px;
+    padding: 40px 0; border-top: 1px solid var(--line);
+    scroll-margin-top: 64px; /* Links like /releases#v0.9.3 land below the sticky nav. */
+  }
+  .release:first-child { border-top: none; }
+  .meta { position: sticky; top: 88px; align-self: start; }
+  .version { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+  .date { color: var(--faint); font-size: 14px; }
+  .latest {
+    display: inline-block; margin-top: 10px; padding: 3px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff;
+  }
+  .release h2 { font-size: clamp(24px, 3.4vw, 32px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 8px; }
+  .summary { color: var(--muted); font-size: 17px; margin: 0 0 22px; }
+  .changes { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .change {
+    display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px;
+  }
+  .change .icon {
+    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(255,255,255,0.05); font-size: 22px;
+  }
+  .change h3 { margin: 0 0 4px; font-size: 16.5px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .change p { margin: 0; color: var(--muted); font-size: 15px; }
+  .tag {
+    font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 999px; border: 1px solid currentColor;
+  }
+  .tag.new { color: var(--new); }
+  .tag.improved { color: var(--improved); }
+  .tag.security { color: var(--security); }
+  .release.current .change { border-color: rgba(255,122,89,0.25); }
+  .cta { margin-top: 22px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; color: var(--faint); font-size: 14px; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 56px; color: var(--faint); font-size: 14px; }
+  footer .wrap { display: flex; gap: 18px; justify-content: space-between; flex-wrap: wrap; }
+  footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
+
+  @media (max-width: 760px) {
+    nav .links { display: none; }
+    nav .btn { margin-left: auto; }
+    .release { grid-template-columns: 1fr; gap: 14px; padding: 32px 0; }
+    .meta { position: static; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+    .latest { margin-top: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/"><img src="images/app-icon.png" alt="">Hatch</a>
+    <div class="links">
+      <a href="/#features">Features</a>
+      <a href="/#install">Install</a>
+      <a href="/#safety">Safety</a>
+      <a href="/releases" aria-current="page">What's New</a>
+      <a href="/#faq">FAQ</a>
+    </div>
+    <a class="btn small" href="https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg">Download</a>
+  </div>
+</nav>
+
+<header class="page">
+  <div class="wrap">
+    <h1>What's New in <span class="grad">Hatch</span></h1>
+    <p class="lede">Every release, and what it means for you. Hatch updates itself, so you get all of this automatically.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Newest first. Each release: one headline about the user benefit, a one-line summary, and its changes. -->
+
+  <section class="release current" id="v0.9.3">
+    <div class="meta">
+      <div class="version">0.9.3</div>
+      <div class="date">23 October 2026</div>
+      <span class="latest">Latest</span>
+    </div>
+    <div>
+      <h2>Updates that take care of themselves.</h2>
+      <p class="summary">Install Hatch once, and every new version arrives on its own, with no downloads and no security prompts.</p>
+      <ul class="changes">
+        <li class="change"><span class="icon">⚡️</span><div>
+          <h3>Automatic updates <span class="tag new">New</span></h3>
+          <p>Hatch downloads new versions in the background and installs them the next time it quits. You'll always have the latest features without lifting a finger.</p>
+        </div></li>
+        <li class="change"><span class="icon">🔐</span><div>
+          <h3>Permissions that stay put <span class="tag improved">Improved</span></h3>
+          <p>Calendar and media-control permissions now carry over to every new version, so you grant them once and never again.</p>
+        </div></li>
+        <li class="change"><span class="icon">🎛️</span><div>
+          <h3>You're in control <span class="tag new">New</span></h3>
+          <p>Prefer to choose when to update? Turn off automatic installs in Settings › Updates, and update with one click whenever you like.</p>
+        </div></li>
+        <li class="change"><span class="icon">🛡️</span><div>
+          <h3>Only genuine updates <span class="tag security">Security</span></h3>
+          <p>Every update is verified with Hatch's own signature before it installs, so nothing else can ever pose as a Hatch update.</p>
+        </div></li>
+      </ul>
+      <div class="cta"><a class="btn" href="https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg">Download Hatch 0.9.3</a>
+        <span>Already on 0.9.2? Hatch will offer this update in the notch.</span></div>
+    </div>
+  </section>
+
+  <section class="release" id="v0.9.2">
+    <div class="meta">
+      <div class="version">0.9.2</div>
+      <div class="date">23 October 2026</div>
+    </div>
+    <div>
+      <h2>Always know what's new.</h2>
+      <p class="summary">Hatch now tells you about new versions right in the notch, and gives you a friendly start the first time it runs.</p>
+      <ul class="changes">
+        <li class="change"><span class="icon">🔔</span><div>
+          <h3>Update notifications <span class="tag new">New</span></h3>
+          <p>When a new version is out, a card drops from the notch with what's new, so you never miss an improvement.</p>
+        </div></li>
+        <li class="change"><span class="icon">🔄</span><div>
+          <h3>Check for Updates <span class="tag new">New</span></h3>
+          <p>One click in the menu bar menu tells you whether you're on the latest version.</p>
+        </div></li>
+        <li class="change"><span class="icon">👋</span><div>
+          <h3>A warm welcome <span class="tag new">New</span></h3>
+          <p>The first time Hatch runs, it shows you how to open it and offers to start at login, so you know it's working from the first second.</p>
+        </div></li>
+        <li class="change"><span class="icon">🗓️</span><div>
+          <h3>A clear early-access timeline <span class="tag improved">Improved</span></h3>
+          <p>Hatch now tells you upfront that early access is free until 1.0, and points the way when it ends. Your reminders keep working either way.</p>
+        </div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="release" id="v0.9.1">
+    <div class="meta">
+      <div class="version">0.9.1</div>
+      <div class="date">23 October 2026</div>
+    </div>
+    <div>
+      <h2>Your voice, one click away.</h2>
+      <p class="summary">Found a bug or have an idea? Telling us now takes seconds.</p>
+      <ul class="changes">
+        <li class="change"><span class="icon">💬</span><div>
+          <h3>Send Feedback <span class="tag new">New</span></h3>
+          <p>Choose Send Feedback from the menu bar or Settings, and a ready-to-send report opens with your Hatch and macOS versions already filled in.</p>
+        </div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="release" id="v0.9.0">
+    <div class="meta">
+      <div class="version">0.9.0</div>
+      <div class="date">23 October 2026</div>
+    </div>
+    <div>
+      <h2>Your notch, put to work.</h2>
+      <p class="summary">The first early-access release: Hatch turns the space around your camera into a live panel for what you're doing right now.</p>
+      <ul class="changes">
+        <li class="change"><span class="icon">🎵</span><div>
+          <h3>Now playing, everywhere <span class="tag new">New</span></h3>
+          <p>See and control what's playing in Apple Music, Spotify, and YouTube or any video in Safari, Chrome, Brave, Edge and Arc, without switching apps.</p>
+        </div></li>
+        <li class="change"><span class="icon">🎤</span><div>
+          <h3>Live lyrics <span class="tag new">New</span></h3>
+          <p>Time-synced lyrics fill in word by word under the notch as the song plays, and slide out of the way when your pointer comes near.</p>
+        </div></li>
+        <li class="change"><span class="icon">📹</span><div>
+          <h3>Join meetings in one click <span class="tag new">New</span></h3>
+          <p>Hatch finds the link for Zoom, Google Meet, Teams, Webex, Slack huddles, FaceTime and more, even when it's buried in the invite, and counts down to each meeting.</p>
+        </div></li>
+        <li class="change"><span class="icon">⏰</span><div>
+          <h3>Reminders you can't miss <span class="tag new">New</span></h3>
+          <p>Add a to-do and choose when to be reminded. When it's due, the notch drops down, shakes and chimes until you snooze it, finish it or delete it.</p>
+        </div></li>
+        <li class="change"><span class="icon">📥</span><div>
+          <h3>A shelf for your files <span class="tag new">New</span></h3>
+          <p>Drop files onto the notch to keep them handy, then drag them into any app or AirDrop them.</p>
+        </div></li>
+        <li class="change"><span class="icon">📋</span><div>
+          <h3>Clipboard history and notes <span class="tag new">New</span></h3>
+          <p>Bring back anything you copied with one click, privately, plus a scratchpad that saves as you type.</p>
+        </div></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Hatch. Made in India.</span>
+    <span class="links">
+      <a href="/privacy">Privacy</a>
+      <a href="/feedback">Send feedback</a>
+      <a href="https://github.com/tuhinrawat/hatch/releases">Downloads &amp; checksums</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
