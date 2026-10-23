@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Hatch Admin</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  :root { --bg: #07070b; --panel: #111118; --line: rgba(255,255,255,0.08); --text: #f4f4f7; --muted: #a1a1b0; --accent: #ff7a59; --accent-2: #c058ff; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Inter", sans-serif; -webkit-font-smoothing: antialiased; }
+  .wrap { width: min(960px, 100% - 32px); margin: 0 auto; padding: 40px 0 80px; }
+  h1 { font-size: 28px; letter-spacing: -0.02em; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 28px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 22px; margin-bottom: 16px; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  .kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+  .kpi .label { color: var(--muted); font-size: 13px; }
+  .kpi .value { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin-top: 4px; }
+  .chart { display: flex; align-items: flex-end; gap: 4px; height: 160px; padding-top: 10px; }
+  .bar { flex: 1; background: linear-gradient(180deg, var(--accent), var(--accent-2)); border-radius: 4px 4px 0 0; min-height: 2px; position: relative; }
+  .bar:hover::after { content: attr(data-tip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); white-space: nowrap; background: #000; border: 1px solid var(--line); padding: 3px 8px; border-radius: 6px; font-size: 12px; margin-bottom: 4px; }
+  .axis { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; margin-top: 6px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  form { display: flex; gap: 10px; flex-wrap: wrap; }
+  input { flex: 1; min-width: 220px; background: #000; color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font: inherit; }
+  button { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; border: 0; border-radius: 999px; padding: 10px 18px; font: inherit; font-weight: 600; cursor: pointer; }
+  button.link { background: none; color: var(--muted); padding: 0; font-weight: 400; text-decoration: underline; }
+  .error { color: #ff8a8a; margin-top: 10px; }
+  .note { color: var(--muted); font-size: 13px; }
+  @media (max-width: 700px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Hatch Admin</h1>
+  <p class="sub">Active copies of Hatch per day (each copy reports once a day, with only its version) and downloads.</p>
+
+  <div id="login" class="card" hidden>
+    <form id="login-form">
+      <input id="token" type="password" placeholder="Admin key" autocomplete="current-password" required>
+      <button type="submit">Show stats</button>
+    </form>
+    <p class="note">The key is the ADMIN_TOKEN you set in Vercel. It's remembered in this browser only.</p>
+    <p id="error" class="error" hidden></p>
+  </div>
+
+  <div id="stats" hidden>
+    <div class="kpis">
+      <div class="kpi"><div class="label">Active today</div><div class="value" id="k-today">–</div></div>
+      <div class="kpi"><div class="label">Active yesterday</div><div class="value" id="k-yesterday">–</div></div>
+      <div class="kpi"><div class="label">Peak (30 days)</div><div class="value" id="k-peak">–</div></div>
+      <div class="kpi"><div class="label">Total downloads</div><div class="value" id="k-downloads">–</div></div>
+    </div>
+    <div class="card">
+      <strong>Active copies, last 30 days</strong>
+      <div class="chart" id="chart"></div>
+      <div class="axis"><span id="axis-start"></span><span>Today</span></div>
+    </div>
+    <div class="card">
+      <strong>By day and version</strong>
+      <table id="days"></table>
+    </div>
+    <div class="card">
+      <strong>Downloads by release</strong>
+      <table id="downloads"></table>
+    </div>
+    <p class="note">"Today" counts copies that have reported since 00:00 UTC (05:30 IST), so it grows through the day.
+      <button class="link" id="logout" type="button">Forget key on this browser</button></p>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const $ = (id) => document.getElementById(id);
+    const KEY = "hatch-admin-token";
+    const read = () => { try { return localStorage.getItem(KEY); } catch { return null; } };
+    const save = (t) => { try { t ? localStorage.setItem(KEY, t) : localStorage.removeItem(KEY); } catch {} };
+    const cell = (text, num) => { const td = document.createElement("td"); td.textContent = text; if (num) td.className = "num"; return td; };
+    const row = (cells) => { const tr = document.createElement("tr"); cells.forEach((c) => tr.append(c)); return tr; };
+    const head = (labels) => row(labels.map(([t, num]) => { const th = document.createElement("th"); th.textContent = t; if (num) th.className = "num"; return th; }));
+
+    function showLogin(message) {
+      $("stats").hidden = true;
+      $("login").hidden = false;
+      $("error").hidden = !message;
+      $("error").textContent = message || "";
+    }
+
+    async function load(token) {
+      const response = await fetch("/api/stats", { headers: { Authorization: `Bearer ${token}` } });
+      if (response.status === 401) { save(null); return showLogin("That key isn't right."); }
+      if (!response.ok) return showLogin("Stats are unavailable right now (is the database connected in Vercel?).");
+      const { daily, downloads } = await response.json();
+      $("login").hidden = true;
+      $("stats").hidden = false;
+
+      const totals = daily.map((d) => d.total);
+      $("k-today").textContent = totals[0] ?? 0;
+      $("k-yesterday").textContent = totals[1] ?? 0;
+      $("k-peak").textContent = Math.max(0, ...totals);
+      $("k-downloads").textContent = downloads.reduce((s, d) => s + d.count, 0);
+
+      const chart = $("chart");
+      chart.replaceChildren();
+      const peak = Math.max(1, ...totals);
+      [...daily].reverse().forEach((d) => {
+        const bar = document.createElement("div");
+        bar.className = "bar";
+        bar.style.height = `${(d.total / peak) * 100}%`;
+        bar.dataset.tip = `${d.day}: ${d.total}`;
+        chart.append(bar);
+      });
+      $("axis-start").textContent = daily[daily.length - 1]?.day || "";
+
+      const days = $("days");
+      days.replaceChildren(head([["Day"], ["Active", true], ["Versions"]]));
+      daily.filter((d) => d.total > 0).forEach((d) => {
+        const versions = Object.entries(d.versions).sort((a, b) => b[1] - a[1]).map(([v, n]) => `${v}: ${n}`).join(" · ");
+        days.append(row([cell(d.day), cell(d.total, true), cell(versions)]));
+      });
+      if (days.rows.length === 1) days.append(row([cell("No reports yet"), cell(""), cell("")]));
+
+      const dl = $("downloads");
+      dl.replaceChildren(head([["Release"], ["Downloads", true]]));
+      downloads.forEach((d) => dl.append(row([cell(d.version), cell(d.count, true)])));
+    }
+
+    $("login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const token = $("token").value.trim();
+      save(token);
+      load(token);
+    });
+    $("logout").addEventListener("click", () => { save(null); $("token").value = ""; showLogin(); });
+
+    const saved = read();
+    saved ? load(saved) : showLogin();
+  })();
+</script>
+</body>
+</html>

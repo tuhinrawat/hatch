@@ -40,7 +40,7 @@
   <h1>Privacy</h1>
   <p class="updated">Last updated 23 October 2026</p>
 
-  <div class="summary"><p><strong>In short:</strong> Hatch has no accounts, no analytics and no tracking. Your data stays on your Mac. The app only goes online to fetch artwork and lyrics for what you're playing, and to check for updates.</p></div>
+  <div class="summary"><p><strong>In short:</strong> Hatch has no accounts and no tracking, and nothing it sends identifies you. Your data stays on your Mac. The app only goes online for artwork, lyrics and update checks, plus a once-a-day count of which version is in use.</p></div>
 
   <h2>What stays on your Mac</h2>
   <ul>
@@ -60,8 +60,9 @@
     <li><strong>Lyrics:</strong> for Music and Spotify, Hatch asks <a href="https://lrclib.net">LRCLIB</a>, a free open lyrics database, for the current song, sending its title, artist, album and length. You can turn lyrics off in Settings.</li>
     <li><strong>Artwork:</strong> album art and video thumbnails are fetched from the address the player or website provides.</li>
     <li><strong>Update check:</strong> a few times a day Hatch downloads <code>myhatch.dev/version.json</code> to see whether a new version is out. The request contains nothing about you, only the app version.</li>
+    <li><strong>Daily version count:</strong> once a day Hatch tells <code>myhatch.dev</code> its version number (for example "0.9.6"), so we can count how many copies are in use. Nothing else is sent: no ID, name, serial number or device details. We keep only daily totals per version, for 90 days, and don't store IP addresses.</li>
   </ul>
-  <p>Hatch sends no usage data, crash reports or identifiers.</p>
+  <p>Hatch sends no usage details, crash reports or identifiers.</p>
 
   <h2>This website</h2>
   <p>We count visits with <strong>Vercel Web Analytics</strong>, which uses no cookies and doesn't identify you; it reports totals such as page views, referring sites and countries. Downloads are served by GitHub, which counts how many times each release is downloaded.</p>
