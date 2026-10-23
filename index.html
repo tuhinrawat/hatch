@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hatch: your MacBook's notch, put to work</title>
+<meta name="description" content="Hatch hides in your MacBook's notch and opens into now playing with live lyrics, one-click meeting joins, to-dos that won't let you forget, a file tray and clipboard history.">
+<meta property="og:title" content="Hatch: your MacBook's notch, put to work">
+<meta property="og:description" content="Music with live lyrics, one-click meeting joins, to-dos with reminders, a file tray and clipboard history, right in your notch.">
+<meta property="og:image" content="images/open-home.jpg">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  :root {
+    --bg: #07070b;
+    --panel: #111118;
+    --line: rgba(255, 255, 255, 0.08);
+    --text: #f4f4f7;
+    --muted: #a1a1b0;
+    --faint: #6c6c7c;
+    --accent: #ff7a59;
+    --accent-2: #c058ff;
+    --radius: 22px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; height: auto; display: block; }
+  .wrap { width: min(1120px, 100% - 32px); margin: 0 auto; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(16px) saturate(1.4);
+    background: rgba(7, 7, 11, 0.72);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; text-decoration: none; }
+  .brand img { width: 30px; height: 30px; }
+  nav .links { display: flex; gap: 24px; margin-left: auto; font-size: 14px; color: var(--muted); }
+  nav .links a { text-decoration: none; }
+  nav .links a:hover { color: var(--text); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 999px;
+    font-weight: 600; font-size: 15px; text-decoration: none;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff; box-shadow: 0 10px 30px -10px rgba(255, 122, 89, 0.6);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 34px -10px rgba(255, 122, 89, 0.75); }
+  .btn.small { padding: 8px 16px; font-size: 14px; }
+  .btn.ghost { background: transparent; border: 1px solid var(--line); box-shadow: none; }
+
+  /* Hero */
+  header.hero { position: relative; padding: 96px 0 64px; text-align: center; overflow: hidden; }
+  header.hero::before {
+    content: ""; position: absolute; inset: -40% -10% auto; height: 700px; z-index: -1;
+    background: radial-gradient(closest-side, rgba(192, 88, 255, 0.28), transparent 70%),
+                radial-gradient(closest-side at 70% 40%, rgba(255, 122, 89, 0.25), transparent 70%);
+  }
+  .eyebrow {
+    display: inline-block; padding: 6px 14px; border-radius: 999px;
+    border: 1px solid var(--line); background: rgba(255,255,255,0.03);
+    font-size: 13px; color: var(--muted); margin-bottom: 24px;
+  }
+  h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.035em; margin: 0 0 20px; }
+  h1 .grad, h2 .grad {
+    background: linear-gradient(135deg, #ffb199, var(--accent) 40%, var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lede { font-size: clamp(17px, 2.2vw, 21px); color: var(--muted); max-width: 680px; margin: 0 auto 32px; }
+  .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .fine { margin-top: 14px; font-size: 13px; color: var(--faint); }
+  .shot {
+    border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 40px 80px -30px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
+  }
+  .hero .shot { margin: 56px auto 0; max-width: 1000px; }
+
+  /* Live activities strip */
+  section { padding: 88px 0; }
+  .section-head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+  h2 { font-size: clamp(30px, 4.4vw, 48px); line-height: 1.1; letter-spacing: -0.025em; margin: 0 0 14px; }
+  .section-head p { color: var(--muted); font-size: 18px; margin: 0; }
+  .live-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .live-card img { width: 100%; }
+  .live-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .live-card figcaption { padding: 16px 22px 20px; }
+  .live-card strong { display: block; font-size: 17px; }
+  .live-card span { color: var(--muted); font-size: 15px; }
+
+  /* Feature rows */
+  .feature { display: grid; grid-template-columns: 1fr 1.35fr; gap: 56px; align-items: center; padding: 56px 0; }
+  .feature.flip { grid-template-columns: 1.35fr 1fr; }
+  .feature.flip .copy { order: 2; }
+  .tag { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  .feature h3 { font-size: clamp(26px, 3.2vw, 36px); line-height: 1.15; letter-spacing: -0.02em; margin: 10px 0 14px; }
+  .feature p { color: var(--muted); font-size: 17px; margin: 0 0 16px; }
+  .feature ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .feature li { display: flex; gap: 10px; color: var(--text); font-size: 15.5px; }
+  .feature li::before { content: "✓"; color: var(--accent); font-weight: 700; }
+  .stack { display: grid; gap: 16px; }
+
+  /* Small feature cards */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+  .card .icon { font-size: 26px; margin-bottom: 12px; }
+  .card h4 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* Install */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: step; }
+  .step { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; position: relative; }
+  .step::before {
+    counter-increment: step; content: counter(step);
+    display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); font-weight: 700; margin-bottom: 14px;
+  }
+  .step h4 { margin: 0 0 6px; font-size: 17px; }
+  .step p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .note { margin-top: 20px; text-align: center; color: var(--faint); font-size: 14px; }
+  kbd { font: inherit; font-size: 13px; padding: 1px 6px; border-radius: 6px; border: 1px solid var(--line); background: rgba(255,255,255,0.05); }
+
+  /* Pricing */
+  .pricing { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 860px; margin: 0 auto; }
+  .plan { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; }
+  .plan.featured { border-color: rgba(255, 122, 89, 0.5); background: linear-gradient(180deg, rgba(255,122,89,0.08), var(--panel) 60%); }
+  .plan .price { font-size: 44px; font-weight: 700; letter-spacing: -0.03em; margin: 8px 0 4px; }
+  .plan .price small { font-size: 16px; color: var(--muted); font-weight: 500; }
+  .plan p { color: var(--muted); margin: 0 0 18px; }
+  .plan ul { margin: 0 0 24px; padding-left: 18px; color: var(--text); }
+  .plan li { margin: 6px 0; }
+
+  /* FAQ */
+  .faq { max-width: 760px; margin: 0 auto; }
+  details { border-bottom: 1px solid var(--line); padding: 20px 4px; }
+  summary { cursor: pointer; font-weight: 600; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::after { content: "+"; color: var(--muted); font-weight: 400; font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "−"; }
+  details p { color: var(--muted); margin: 12px 0 0; }
+
+  footer { border-top: 1px solid var(--line); padding: 36px 0 56px; color: var(--faint); font-size: 14px; }
+  footer .wrap { display: flex; gap: 16px; justify-content: space-between; flex-wrap: wrap; }
+
+  @media (max-width: 860px) {
+    .live-grid { grid-template-columns: 1fr; }
+    nav .links { display: none; }
+    .feature, .feature.flip { grid-template-columns: 1fr; gap: 28px; padding: 36px 0; }
+    .feature.flip .copy { order: 0; }
+    .cards, .steps, .pricing { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+    header.hero { padding-top: 64px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#"><img src="images/app-icon.png" alt="">Hatch</a>
+    <div class="links">
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="btn small" href="https://github.com/tuhinrawat/hatch/releases/latest">Download</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Free early access · macOS 14+ · Apple silicon</span>
+    <h1>Your notch,<br><span class="grad">put to work.</span></h1>
+    <p class="lede">Hatch hides in your MacBook's notch and opens into your music, meetings, to-dos and files the moment you need them, then tucks itself away again.</p>
+    <div class="cta">
+      <a class="btn" href="https://github.com/tuhinrawat/hatch/releases/latest">Download Hatch for Mac</a>
+      <a class="btn ghost" href="#features">See what it does</a>
+    </div>
+    <p class="fine">No account, no subscription. Free during early access, then $4.99 once.</p>
+    <div class="shot"><img src="images/hero.jpg" alt="Hatch open below the notch, showing a playing song with a live lyric line, and today's meetings with Join buttons" width="2000" height="660"></div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Alive, even when <span class="grad">closed.</span></h2>
+      <p>Hatch sits right beside your camera and shows what matters now, without covering your menu bar.</p>
+    </div>
+    <div class="live-grid">
+      <figure class="live-card" style="margin:0">
+        <img src="images/live-music.jpg" alt="Closed notch showing album art, animated bars and a lyric line filling in as it's sung" width="880" height="192">
+        <figcaption><strong>Live lyrics as you listen</strong><span>Time-synced lyrics for Apple Music and Spotify fill in word by word under the notch. Move your pointer near and they slide out of the way.</span></figcaption>
+      </figure>
+      <figure class="live-card" style="margin:0">
+        <img src="images/live-meeting.jpg" alt="Closed notch showing a calendar icon and 'in 4m' before a meeting" width="880" height="192">
+        <figcaption><strong>Never late to a call</strong><span>Your next meeting counts down beside the camera, then switches to "Now" when it starts.</span></figcaption>
+      </figure>
+      <figure class="live-card" style="margin:0">
+        <img src="images/live-charging.jpg" alt="Closed notch showing a green bolt and 82% when the charger is connected" width="880" height="192">
+        <figcaption><strong>Charging at a glance</strong><span>Plug in and Hatch shows your battery level for a moment.</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="feature">
+      <div class="copy">
+        <span class="tag">Now playing</span>
+        <h3>Every player, one place.</h3>
+        <p>Apple Music, Spotify, and YouTube or any video in Safari, Chrome, Brave, Edge and Arc. See the artwork, scrub the timeline, and skip without switching apps.</p>
+        <ul>
+          <li>Live, time-synced lyrics under the notch</li>
+          <li>Play, pause, skip and seek from the notch</li>
+          <li>Follows whatever is actually playing</li>
+        </ul>
+      </div>
+      <div class="shot"><img src="images/open-home.jpg" alt="Media card with artwork, scrubber, controls and the current lyric line" loading="lazy" width="1400" height="600"></div>
+    </div>
+
+    <div class="feature flip">
+      <div class="copy">
+        <span class="tag">Meetings</span>
+        <h3>Join in one click.</h3>
+        <p>Hatch reads today's calendar and finds the meeting link for you, even when it's buried in the notes or wrapped in an Outlook safe link.</p>
+        <ul>
+          <li>Zoom, Google Meet, Teams, Webex, Slack huddles, FaceTime and more</li>
+          <li>Countdown in the closed notch before each meeting</li>
+          <li>Today and tomorrow at a glance</li>
+        </ul>
+      </div>
+      <div class="shot"><img src="images/open-home.jpg" alt="Calendar card listing meetings with Join buttons" loading="lazy" width="1400" height="600"></div>
+    </div>
+
+    <div class="feature">
+      <div class="copy">
+        <span class="tag">To-dos &amp; reminders</span>
+        <h3>Reminders you can't ignore.</h3>
+        <p>Jot a to-do in seconds and choose when to be reminded: at the time, 15 or 30 minutes, 1, 2 or 6 hours before, or any custom time. When it's due, the notch drops down, shakes and chimes until you snooze it, finish it or delete it.</p>
+        <ul>
+          <li>Several reminders per to-do, just like Calendar</li>
+          <li>Snooze for 5 minutes to an hour</li>
+          <li>Strike items off, then archive them</li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="shot"><img src="images/reminder.jpg" alt="A reminder alert dropping down from the notch with Snooze, Done and Delete" loading="lazy" width="1040" height="300"></div>
+        <div class="shot"><img src="images/open-todos.jpg" alt="The to-do list with due times and reminders" loading="lazy" width="1400" height="600"></div>
+      </div>
+    </div>
+
+    <div class="feature flip">
+      <div class="copy">
+        <span class="tag">Tray</span>
+        <h3>A shelf for your files.</h3>
+        <p>Drag anything onto the notch to park it. Drag it out later into any app, open it, or AirDrop it. Tray files stay put across restarts.</p>
+        <ul>
+          <li>Drop files straight onto the closed notch</li>
+          <li>AirDrop one file or everything at once</li>
+          <li>Copies are kept, so the originals can move</li>
+        </ul>
+      </div>
+      <div class="shot"><img src="images/open-tray.jpg" alt="The file tray showing PDFs, an image, a zip and a Keynote file" loading="lazy" width="1400" height="600"></div>
+    </div>
+
+    <div class="feature">
+      <div class="copy">
+        <span class="tag">Clipboard &amp; notes</span>
+        <h3>Never lose what you copied.</h3>
+        <p>Hatch remembers the last things you copied, so one click brings them back. Passwords from password managers are skipped, and history stays in memory only. A quick notes pad saves as you type.</p>
+        <ul>
+          <li>Recent copies, one click to reuse</li>
+          <li>Private by design: nothing written to disk</li>
+          <li>A scratchpad that's always one hover away</li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="shot"><img src="images/open-clipboard.jpg" alt="Clipboard history with recent copied text" loading="lazy" width="1400" height="600"></div>
+        <div class="shot"><img src="images/open-notes.jpg" alt="The notes scratchpad with a launch checklist" loading="lazy" width="1400" height="600"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Made to <span class="grad">stay out of your way.</span></h2>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="icon">⌨️</div><h4>Open it your way</h4><p>Hover, click, or press <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>Space</kbd> from anywhere. Pin it to keep it open.</p></div>
+      <div class="card"><div class="icon">🔒</div><h4>Private</h4><p>No account, no tracking, no analytics. Hatch only goes online to fetch artwork and lyrics for what you're playing.</p></div>
+      <div class="card"><div class="icon">🪶</div><h4>Light</h4><p>A tiny native app written in Swift. It uses almost no battery and launches at login.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Install in a minute.</h2>
+      <p>This early-access build isn't notarized by Apple yet, so macOS asks you to approve it once.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h4>Download</h4><p>Get the latest <strong>Hatch.dmg</strong> from the download page and open it.</p></div>
+      <div class="step"><h4>Drag to Applications</h4><p>Drag Hatch onto the Applications folder, then open it from there.</p></div>
+      <div class="step"><h4>Click Open Anyway</h4><p>macOS says it "could not verify" Hatch. Click Done, then go to <strong>System Settings › Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>.</p></div>
+      <div class="step"><h4>Allow access</h4><p>Allow Calendar and media control when asked. Hatch is now living in your notch.</p></div>
+    </div>
+    <p class="note">You only approve it once. Releases after launch will be notarized by Apple and open straight away.</p>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Simple pricing. <span class="grad">Yours forever.</span></h2>
+      <p>No subscription. Buy once, and Hatch keeps working, even offline and even if this website disappears.</p>
+    </div>
+    <div class="pricing">
+      <div class="plan featured">
+        <strong>Early access</strong>
+        <div class="price">Free</div>
+        <p>Every feature, while Hatch is in early access.</p>
+        <ul><li>All features included</li><li>Updates during early access</li><li>Help shape what's next</li></ul>
+        <a class="btn" href="https://github.com/tuhinrawat/hatch/releases/latest">Download free</a>
+      </div>
+      <div class="plan">
+        <strong>After launch</strong>
+        <div class="price">$4.99 <small>one time</small></div>
+        <p>7-day free trial, then a single payment.</p>
+        <ul><li>Lifetime license for your Macs</li><li>Works offline, no account</li><li>Signed and notarized by Apple</li></ul>
+        <a class="btn ghost" href="#faq">Coming soon</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq">
+    <div class="section-head"><h2>Questions</h2></div>
+    <details><summary>Which Macs does Hatch work on?</summary><p>Any Apple silicon Mac running macOS Sonoma (14) or later. It shines on MacBooks with a notch; on other displays it lives at the top centre of the screen.</p></details>
+    <details><summary>Why does macOS say it can't verify Hatch?</summary><p>Early-access builds aren't notarized by Apple yet, so macOS asks you to approve the app once in System Settings › Privacy &amp; Security. Releases after launch will be notarized and open without the warning.</p></details>
+    <details><summary>How do lyrics work?</summary><p>For Apple Music and Spotify, Hatch looks up time-synced lyrics on LRCLIB, a free, open lyrics database, sending only the song's title, artist, album and length. You can turn lyrics off in Settings.</p></details>
+    <details><summary>How does YouTube and browser media work?</summary><p>Load the included browser extension in Chrome, Brave, Edge or Arc. Or turn on "Allow JavaScript from Apple Events" once in the browser (Chrome: View › Developer; Safari: Develop menu). Hatch only reads the playing video's title, time and artwork.</p></details>
+    <details><summary>What data does Hatch collect?</summary><p>None. There are no accounts, analytics or tracking. Clipboard history stays in memory, and your to-dos, notes and tray files stay on your Mac.</p></details>
+    <details><summary>What happens when early access ends?</summary><p>Hatch will move to a 7-day free trial and a one-time $4.99 purchase. Licenses are verified on your Mac, so once you've bought it, it works for good.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Hatch. Made in India.</span>
+    <span><a href="https://github.com/tuhinrawat/hatch/releases">Releases</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
