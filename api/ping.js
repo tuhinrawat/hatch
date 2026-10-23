@@ -17,6 +17,7 @@ module.exports = async (req, res) => {
     await pipeline([["HINCRBY", key, version, 1], ["EXPIRE", key, KEEP_SECONDS]]);
     return res.status(204).end();
   } catch (error) {
-    return res.status(503).json({ error: "Unavailable" });
+    // The message names the failing part (not connected / rejected), never a secret.
+    return res.status(503).json({ error: String(error.message || error) });
   }
 };
