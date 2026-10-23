@@ -1,6 +1,6 @@
 {
-  "latest": "0.9.5",
+  "latest": "0.9.6",
   "earlyAccessOpen": true,
   "download": "https://www.myhatch.dev/download",
-  "notes": "An Update button inside Hatch, and new versions arrive within the hour"
+  "notes": "Small improvements and fixes"
 }
