@@ -4,14 +4,14 @@
     <title>Hatch</title>
     <link>https://www.myhatch.dev/</link>
     <item>
-      <title>Hatch 0.9.7</title>
-      <pubDate>Fri, 23 Oct 2026 20:08:56 GMT</pubDate>
-      <sparkle:version>0.9.7</sparkle:version>
-      <sparkle:shortVersionString>0.9.7</sparkle:shortVersionString>
+      <title>Hatch 0.10.0</title>
+      <pubDate>Fri, 23 Oct 2026 21:39:57 GMT</pubDate>
+      <sparkle:version>0.10.0</sparkle:version>
+      <sparkle:shortVersionString>0.10.0</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-      <description><![CDATA[<p>Hatch now keeps up when you pause or close your browser</p>]]></description>
-      <enclosure url="https://github.com/tuhinrawat/hatch/releases/download/v0.9.7/Hatch.dmg" type="application/octet-stream"
-                 sparkle:edSignature="/Cpwb5Wb3tZ1uMH5yII+mEclRRmASoKvkE4DSt8+K8O3/QegJNZSBJ0vdQ61/PgVn5WCoUuxmdMxFM7s5ntSDQ==" length="2203834"/>
+      <description><![CDATA[<p>Focus blocks, a daily plan and wrap-up, Smart Copy, busy-app warnings, and a much lighter Hatch</p>]]></description>
+      <enclosure url="https://github.com/tuhinrawat/hatch/releases/download/v0.10.0/Hatch.dmg" type="application/octet-stream"
+                 sparkle:edSignature="x/nZvSDoXq7vb6D3qF6mnZ/F1kkVaRdKii8HUkDeZxbW/ACKuklOpBzMiwXE5jmMkEpLizBlpY+z/Rs+FQboAQ==" length="2571324"/>
     </item>
   </channel>
 </rss>

@@ -1,6 +1,6 @@
 {
-  "latest": "0.9.7",
+  "latest": "0.10.0",
   "earlyAccessOpen": true,
   "download": "https://www.myhatch.dev/download",
-  "notes": "Hatch now keeps up when you pause or close your browser"
+  "notes": "Focus blocks, a daily plan and wrap-up, Smart Copy, busy-app warnings, and a much lighter Hatch"
 }
