@@ -16,6 +16,25 @@
 <meta name="twitter:image" content="https://www.myhatch.dev/images/hero.jpg">
 <link rel="canonical" href="https://www.myhatch.dev/">
 <link rel="icon" type="image/png" href="favicon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Hatch",
+  "url": "https://www.myhatch.dev/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "macOS 14 or later (Apple silicon)",
+  "softwareVersion": "0.9.1",
+  "downloadUrl": "https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg",
+  "image": "https://www.myhatch.dev/images/hero.jpg",
+  "description": "Hatch turns your MacBook's notch into a live panel: now playing with time-synced lyrics, one-click meeting joins, to-dos with reminders, a file tray and clipboard history.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Tuhin Rawat", "url": "https://github.com/tuhinrawat" }
+}
+</script>
+<!-- Vercel Web Analytics: cookie-free, aggregated page views. Enable it in the Vercel project's Analytics tab. -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <style>
   :root {
     --bg: #07070b;
@@ -155,6 +174,20 @@
   details[open] summary::after { content: "−"; }
   details p { color: var(--muted); margin: 12px 0 0; }
 
+  .card a, .verify a, details a { color: #ffb199; }
+  .verify {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; margin-top: 18px;
+  }
+  .verify > div { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+  .verify strong { font-size: 18px; }
+  .verify p { color: var(--muted); font-size: 15px; margin: 6px 0 14px; }
+  .verify code {
+    display: block; font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px 12px; margin-top: 8px; overflow-wrap: anywhere; color: var(--text);
+  }
+  .verify code.hash { color: #ffb199; }
+  .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
   footer { border-top: 1px solid var(--line); padding: 36px 0 56px; color: var(--faint); font-size: 14px; }
   footer .wrap { display: flex; gap: 16px; justify-content: space-between; flex-wrap: wrap; }
 
@@ -164,7 +197,7 @@
     nav .links { display: none; }
     .feature, .feature.flip { grid-template-columns: 1fr; gap: 28px; padding: 36px 0; }
     .feature.flip .copy { order: 0; }
-    .cards, .steps, .pricing { grid-template-columns: 1fr; }
+    .cards, .steps, .pricing, .verify { grid-template-columns: 1fr; }
     section { padding: 64px 0; }
     header.hero { padding-top: 64px; }
   }
@@ -178,6 +211,7 @@
     <div class="links">
       <a href="#features">Features</a>
       <a href="#install">Install</a>
+      <a href="#safety">Safety</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </div>
@@ -331,6 +365,44 @@
   </div>
 </section>
 
+<section id="safety">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Is Hatch <span class="grad">safe to install?</span></h2>
+      <p>Fair question, since macOS warns you about it. Here's exactly why, and how you can check for yourself.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🧾</div>
+        <h4>Why macOS warns you</h4>
+        <p>Apple's notarization costs $99 a year. Hatch is an independent app in free early access, so this build isn't notarized yet. That means Apple hasn't scanned it, not that anything is wrong with it. Paid releases will be notarized.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔍</div>
+        <h4>Checked by antivirus engines</h4>
+        <p>Every release is uploaded to VirusTotal, where dozens of antivirus engines check it. <a href="https://www.virustotal.com/gui/file/<!--sha256-->425cbf7a586fc0b692d301d92ea7924fec9bbc3d25958bc6386596621e4b4107<!--/sha256-->">See the report for this version</a>.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔐</div>
+        <h4>Only what it needs</h4>
+        <p>Calendar (to show events and find join links) and permission to control Music, Spotify and your browsers (to show what's playing). No accounts, no tracking, no access to your files beyond what you drop on it. <a href="/privacy">Privacy details</a>.</p>
+      </div>
+    </div>
+    <div class="verify">
+      <div>
+        <strong>Verify your download</strong>
+        <p>Hatch <!--version-->0.9.1<!--/version--> · Hatch.dmg · SHA-256. In Terminal, run the command below and check that it prints this exact value.</p>
+        <code class="hash"><!--sha256-->425cbf7a586fc0b692d301d92ea7924fec9bbc3d25958bc6386596621e4b4107<!--/sha256--></code>
+        <code>shasum -a 256 ~/Downloads/Hatch.dmg</code>
+      </div>
+      <div>
+        <strong>Made by a real person</strong>
+        <p>Hatch is built by <a href="https://github.com/tuhinrawat">Tuhin Rawat</a> in India. Found a bug or have an idea? <a href="/feedback">Open an issue</a>; every one gets read.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="pricing">
   <div class="wrap">
     <div class="section-head">
@@ -363,7 +435,8 @@
     <details><summary>Why does macOS say it can't verify Hatch?</summary><p>Early-access builds aren't notarized by Apple yet, so macOS asks you to approve the app once in System Settings › Privacy &amp; Security. Releases after launch will be notarized and open without the warning.</p></details>
     <details><summary>How do lyrics work?</summary><p>For Apple Music and Spotify, Hatch looks up time-synced lyrics on LRCLIB, a free, open lyrics database, sending only the song's title, artist, album and length. You can turn lyrics off in Settings.</p></details>
     <details><summary>How does YouTube and browser media work?</summary><p>Load the included browser extension in Chrome, Brave, Edge or Arc. Or turn on "Allow JavaScript from Apple Events" once in the browser (Chrome: View › Developer; Safari: Develop menu). Hatch only reads the playing video's title, time and artwork.</p></details>
-    <details><summary>What data does Hatch collect?</summary><p>None. There are no accounts, analytics or tracking. Clipboard history stays in memory, and your to-dos, notes and tray files stay on your Mac.</p></details>
+    <details><summary>What data does Hatch collect?</summary><p>None. The app has no accounts, analytics or tracking. Clipboard history stays in memory, and your to-dos, notes and tray files stay on your Mac. This website counts visits with Vercel Web Analytics, which uses no cookies and stores no personal data. See the <a href="/privacy">privacy page</a>.</p></details>
+    <details><summary>How do I send feedback or report a bug?</summary><p>In Hatch, open the menu bar icon and choose <strong>Send Feedback…</strong>. It opens a GitHub issue with your Hatch and macOS versions filled in. You can also go to <a href="/feedback">myhatch.dev/feedback</a>.</p></details>
     <details><summary>What happens when early access ends?</summary><p>Hatch will move to a 7-day free trial and a one-time $4.99 purchase. Licenses are verified on your Mac, so once you've bought it, it works for good.</p></details>
   </div>
 </section>
@@ -371,7 +444,11 @@
 <footer>
   <div class="wrap">
     <span>© 2026 Hatch. Made in India.</span>
-    <span><a href="https://github.com/tuhinrawat/hatch/releases">All releases &amp; release notes</a></span>
+    <span class="footer-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/feedback">Send feedback</a>
+      <a href="https://github.com/tuhinrawat/hatch/releases">All releases &amp; release notes</a>
+    </span>
   </div>
 </footer>
 

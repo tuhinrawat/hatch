@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · Hatch</title>
+<meta name="description" content="Hatch collects no personal data. What the app does with Calendar, media and clipboard access, and what this website measures.">
+<link rel="canonical" href="https://www.myhatch.dev/privacy">
+<link rel="icon" type="image/png" href="favicon.png">
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<style>
+  :root { --bg: #07070b; --line: rgba(255,255,255,0.08); --text: #f4f4f7; --muted: #a1a1b0; --accent: #ff7a59; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: #ffb199; }
+  .wrap { width: min(760px, 100% - 32px); margin: 0 auto; }
+  header { border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; text-decoration: none; color: var(--text); }
+  .brand img { width: 30px; height: 30px; }
+  main { padding: 56px 0 80px; }
+  h1 { font-size: clamp(34px, 6vw, 48px); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 8px; }
+  .updated { color: var(--muted); margin: 0 0 40px; }
+  h2 { font-size: 22px; letter-spacing: -0.01em; margin: 40px 0 8px; }
+  p, li { color: var(--muted); }
+  strong { color: var(--text); }
+  .summary { border: 1px solid rgba(255,122,89,0.4); background: rgba(255,122,89,0.06); border-radius: 18px; padding: 20px 24px; }
+  .summary p { margin: 0; color: var(--text); }
+  footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: #6c6c7c; font-size: 14px; }
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="/"><img src="images/app-icon.png" alt="">Hatch</a></div></header>
+<main class="wrap">
+  <h1>Privacy</h1>
+  <p class="updated">Last updated 23 October 2026</p>
+
+  <div class="summary"><p><strong>In short:</strong> Hatch has no accounts, no analytics and no tracking. Your data stays on your Mac. The app only connects to the internet to fetch artwork and lyrics for what you're playing.</p></div>
+
+  <h2>What stays on your Mac</h2>
+  <ul>
+    <li><strong>To-dos, notes and settings</strong> are saved on your Mac only.</li>
+    <li><strong>Tray files</strong> are copied to a folder on your Mac (<code>~/Library/Application Support/Hatch</code>) and never uploaded.</li>
+    <li><strong>Clipboard history</strong> is kept in memory only and is gone when Hatch quits. Items that password managers mark as private are never recorded.</li>
+  </ul>
+
+  <h2>Permissions, and why</h2>
+  <ul>
+    <li><strong>Calendar:</strong> to show today's and tomorrow's events and find meeting links. Events are read on your Mac and never sent anywhere.</li>
+    <li><strong>Automation (Music, Spotify and browsers):</strong> to show and control what's playing. In browsers, Hatch reads only the playing video's title, time and artwork.</li>
+  </ul>
+
+  <h2>When Hatch goes online</h2>
+  <ul>
+    <li><strong>Lyrics:</strong> for Music and Spotify, Hatch asks <a href="https://lrclib.net">LRCLIB</a>, a free open lyrics database, for the current song, sending its title, artist, album and length. You can turn lyrics off in Settings.</li>
+    <li><strong>Artwork:</strong> album art and video thumbnails are fetched from the address the player or website provides.</li>
+  </ul>
+  <p>Hatch sends no usage data, crash reports or identifiers.</p>
+
+  <h2>This website</h2>
+  <p>We count visits with <strong>Vercel Web Analytics</strong>, which uses no cookies and doesn't identify you; it reports totals such as page views, referring sites and countries. Downloads are served by GitHub, which counts how many times each release is downloaded.</p>
+
+  <h2>Feedback</h2>
+  <p>If you send feedback through GitHub, it's public and handled under GitHub's privacy policy. Only include what you're happy to share.</p>
+
+  <h2>Questions</h2>
+  <p>Open an issue at <a href="/feedback">myhatch.dev/feedback</a>.</p>
+</main>
+<footer><div class="wrap">© 2026 Hatch · <a href="/">Home</a></div></footer>
+</body>
+</html>

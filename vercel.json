@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/download", "destination": "https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg", "permanent": false },
+    { "source": "/feedback", "destination": "https://github.com/tuhinrawat/hatch/issues/new", "permanent": false }
+  ]
+}
