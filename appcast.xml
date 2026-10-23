@@ -4,14 +4,14 @@
     <title>Hatch</title>
     <link>https://www.myhatch.dev/</link>
     <item>
-      <title>Hatch 0.9.3</title>
-      <pubDate>Fri, 23 Oct 2026 13:58:42 GMT</pubDate>
-      <sparkle:version>0.9.3</sparkle:version>
-      <sparkle:shortVersionString>0.9.3</sparkle:shortVersionString>
+      <title>Hatch 0.9.4</title>
+      <pubDate>Fri, 23 Oct 2026 19:11:08 GMT</pubDate>
+      <sparkle:version>0.9.4</sparkle:version>
+      <sparkle:shortVersionString>0.9.4</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-      <description><![CDATA[<p>Automatic updates: future versions install themselves, and your permissions stay put</p>]]></description>
-      <enclosure url="https://github.com/tuhinrawat/hatch/releases/download/v0.9.3/Hatch.dmg" type="application/octet-stream"
-                 sparkle:edSignature="8A8vxxVkWkVuAnPmOlbJ1ZoyrUGZoyoFscIDzxpvslplAyltfD40J8Dv/p1Ud0KPRNcjpLFXG/zW4zKjQauOCg==" length="2171325"/>
+      <description><![CDATA[<p>Controls respond right after you unlock your Mac, and browser controls are more dependable</p>]]></description>
+      <enclosure url="https://github.com/tuhinrawat/hatch/releases/download/v0.9.4/Hatch.dmg" type="application/octet-stream"
+                 sparkle:edSignature="jqPPOAXVIOikNCUiH1n4tI8ITmsZjL3QLiVu1S29N6DobNwfZVP5qtzrOxIdzfpb0fc4bR8/QjMHhX0TovB1DQ==" length="2176640"/>
     </item>
   </channel>
 </rss>

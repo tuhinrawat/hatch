@@ -1,6 +1,6 @@
 {
-  "latest": "0.9.3",
+  "latest": "0.9.4",
   "earlyAccessOpen": true,
   "download": "https://www.myhatch.dev/download",
-  "notes": "Automatic updates: future versions install themselves, and your permissions stay put"
+  "notes": "Controls respond right after you unlock your Mac, and browser controls are more dependable"
 }
