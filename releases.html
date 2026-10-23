@@ -17,7 +17,7 @@
     --bg: #07070b; --panel: #111118; --line: rgba(255,255,255,0.08);
     --text: #f4f4f7; --muted: #a1a1b0; --faint: #6c6c7c;
     --accent: #ff7a59; --accent-2: #c058ff; --radius: 22px;
-    --new: #7ee2a0; --improved: #8fb8ff; --security: #ffcf6b;
+    --new: #7ee2a0; --improved: #8fb8ff; --security: #ffcf6b; --fixed: #ff9f8a;
   }
   * { box-sizing: border-box; }
   body {
@@ -95,6 +95,7 @@
   .tag.new { color: var(--new); }
   .tag.improved { color: var(--improved); }
   .tag.security { color: var(--security); }
+  .tag.fixed { color: var(--fixed); }
   .release.current .change { border-color: rgba(255,122,89,0.25); }
   .cta { margin-top: 22px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; color: var(--faint); font-size: 14px; }
 
@@ -137,11 +138,34 @@
 <main class="wrap">
   <!-- Newest first. Each release: one headline about the user benefit, a one-line summary, and its changes. -->
 
-  <section class="release current" id="v0.9.3">
+  <section class="release current" id="v0.9.4">
+    <div class="meta">
+      <div class="version">0.9.4</div>
+      <div class="date">24 October 2026</div>
+      <span class="latest">Latest</span>
+    </div>
+    <div>
+      <h2>Ready the moment you're back.</h2>
+      <p class="summary">Play, pause and skip now respond instantly after your Mac wakes up or you log back in.</p>
+      <ul class="changes">
+        <li class="change"><span class="icon">▶️</span><div>
+          <h3>Controls work right after you unlock <span class="tag fixed">Fixed</span></h3>
+          <p>Returning to your Mac and pressing play in Hatch sometimes did nothing until a moment later. Hatch now gets itself ready as soon as you unlock, so every tap counts.</p>
+        </div></li>
+        <li class="change"><span class="icon">🌐</span><div>
+          <h3>More dependable browser controls <span class="tag improved">Improved</span></h3>
+          <p>If a tab reloaded or moved while you were away, Hatch now finds your video again before pausing or playing it, instead of quietly missing.</p>
+        </div></li>
+      </ul>
+      <div class="cta"><a class="btn" href="https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg">Download Hatch 0.9.4</a>
+        <span>On 0.9.3? Hatch installs this update by itself.</span></div>
+    </div>
+  </section>
+
+  <section class="release" id="v0.9.3">
     <div class="meta">
       <div class="version">0.9.3</div>
       <div class="date">23 October 2026</div>
-      <span class="latest">Latest</span>
     </div>
     <div>
       <h2>Updates that take care of themselves.</h2>
@@ -164,8 +188,6 @@
           <p>Every update is verified with Hatch's own signature before it installs, so nothing else can ever pose as a Hatch update.</p>
         </div></li>
       </ul>
-      <div class="cta"><a class="btn" href="https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg">Download Hatch 0.9.3</a>
-        <span>Already on 0.9.2? Hatch will offer this update in the notch.</span></div>
     </div>
   </section>
 
