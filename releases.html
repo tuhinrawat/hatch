@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What's New · Hatch</title>
-<meta name="description" content="Every Hatch release and what it means for you: automatic updates, live lyrics, one-click meeting joins, reminders you can't miss, and more.">
+<meta name="description" content="Every Hatch release and what it means for you: the focus loop, automatic updates, live lyrics, one-click meeting joins, reminders you can't miss, and more.">
 <meta property="og:title" content="What's New in Hatch">
 <meta property="og:description" content="Every Hatch release and what it means for you.">
 <meta property="og:image" content="https://www.myhatch.dev/images/hero.jpg">
@@ -99,6 +99,39 @@
   .release.current .change { border-color: rgba(255,122,89,0.25); }
   .cta { margin-top: 22px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; color: var(--faint); font-size: 14px; }
 
+  /* Feature releases: the stages of a loop, each with screenshots. */
+  .loop { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0 0 8px; padding: 0; list-style: none; }
+  .loop a {
+    display: block; height: 100%; text-decoration: none; background: var(--panel); border: 1px solid var(--line);
+    border-radius: 14px; padding: 12px 14px;
+  }
+  .loop a:hover { border-color: rgba(255,255,255,0.22); }
+  .loop b { display: block; font-size: 15px; }
+  .loop b small { color: var(--faint); font-weight: 600; margin-right: 4px; }
+  .loop span { display: block; font-size: 13px; line-height: 1.4; color: var(--muted); margin-top: 2px; }
+  .stage { margin-top: 36px; scroll-margin-top: 80px; }
+  .stage h3 { font-size: 21px; letter-spacing: -0.01em; margin: 0 0 6px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .stage > p { color: var(--muted); margin: 0 0 14px; }
+  .shots { display: grid; gap: 18px; }
+  .shots figure { margin: 0; }
+  .shots img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); }
+  .shots figcaption { font-size: 13px; color: var(--faint); margin-top: 6px; }
+  .howto { margin: 12px 0 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
+  .howto li { margin: 3px 0; }
+  .box { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; margin-top: 36px; }
+  .box h3 { margin: 0 0 10px; font-size: 18px; }
+  .box ul { margin: 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
+  .box li { margin: 4px 0; }
+  .box li b { color: var(--text); }
+  .keys { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .keys td { padding: 7px 0; border-top: 1px solid var(--line); color: var(--muted); vertical-align: top; }
+  .keys tr:first-child td { border-top: none; }
+  .keys td:first-child { width: 190px; color: var(--text); white-space: nowrap; }
+  kbd {
+    font: 600 13px -apple-system, BlinkMacSystemFont, sans-serif; padding: 2px 7px; border-radius: 6px;
+    background: rgba(255,255,255,0.08); border: 1px solid var(--line);
+  }
+
   footer { border-top: 1px solid var(--line); padding: 32px 0 56px; color: var(--faint); font-size: 14px; }
   footer .wrap { display: flex; gap: 18px; justify-content: space-between; flex-wrap: wrap; }
   footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
@@ -109,6 +142,8 @@
     .release { grid-template-columns: 1fr; gap: 14px; padding: 32px 0; }
     .meta { position: static; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
     .latest { margin-top: 0; }
+    .loop { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .keys td:first-child { width: auto; white-space: normal; padding-right: 12px; }
   }
 </style>
 </head>
@@ -138,11 +173,135 @@
 <main class="wrap">
   <!-- Newest first. Each release: one headline about the user benefit, a one-line summary, and its changes. -->
 
-  <section class="release current" id="v0.9.7">
+  <section class="release current" id="v0.10.0">
+    <div class="meta">
+      <div class="version">0.10</div>
+      <div class="date">24 October 2026</div>
+      <span class="latest">Latest</span>
+    </div>
+    <div>
+      <h2>Get more done, with less noise.</h2>
+      <p class="summary">Hatch 0.10 adds the <b>focus loop</b>: plan your day, focus without interruptions, step away and come back to exactly where you were, then close the day. It also brings two <b>smart helpers</b>, Smart Copy and busy-app warnings, and runs on a fraction of the energy it used before. It all happens in the notch, one thing at a time, and every part can be switched off.</p>
+      <ol class="loop">
+        <li><a href="#loop-plan"><b><small>1</small>Plan</b><span>Pick today's One Thing. Capture to-dos from any app.</span></a></li>
+        <li><a href="#loop-focus"><b><small>2</small>Focus</b><span>A timed block you can see. Hatch goes quiet.</span></a></li>
+        <li><a href="#loop-interrupt"><b><small>3</small>Meetings</b><span>A Join card a minute before, and time left during.</span></a></li>
+        <li><a href="#loop-resume"><b><small>4</small>Resume</b><span>Leave a note on the way out; get it back on return.</span></a></li>
+        <li><a href="#loop-close"><b><small>5</small>Close the day</b><span>See what got done and set up tomorrow.</span></a></li>
+      </ol>
+
+      <div class="stage" id="loop-plan">
+        <h3>1 · Plan your day <span class="tag new">New</span></h3>
+        <p>Writing down what matters frees your mind to do it. Each morning, Hatch asks one question: what would make today a win? Your answer becomes <b>Today's One Thing</b> and stays at the top of Home all day, with a button to start focusing on it.</p>
+        <div class="shots">
+          <figure><img src="images/focus-plan.jpg" width="1120" height="420" loading="lazy" alt="A card under the notch asking what would make today a win, with a text field and two to-dos to pick from"><figcaption>Once a day, after 6:00. Type your One Thing or pick a to-do. Skip it and it won't ask again today.</figcaption></figure>
+          <figure><img src="images/focus-capture.jpg" width="1120" height="250" loading="lazy" alt="The quick capture card with a text field for a new to-do"><figcaption>Press <kbd>⌃⌥N</kbd> in any app to add a to-do. Mention a time, like “tomorrow 5pm”, and you get a reminder then.</figcaption></figure>
+        </div>
+        <ul class="howto">
+          <li>Change your One Thing any time: open Hatch and click it on Home.</li>
+          <li>Quick capture never switches apps. Press Return to save or Esc to cancel.</li>
+        </ul>
+      </div>
+
+      <div class="stage" id="loop-focus">
+        <h3>2 · Focus, and see the time <span class="tag new">New</span></h3>
+        <p>Start a 25, 50 or 90 minute block from Home or with <kbd>⌃⌥F</kbd>. A ring around the notch fills as time passes and your task sits underneath, so you always know what you're on and how long is left. While you focus, Hatch holds back its own alerts. Your reminders and meetings still come through.</p>
+        <div class="shots">
+          <figure><img src="images/focus-closed.jpg" width="880" height="192" loading="lazy" alt="The closed notch showing a progress ring, 35 minutes left, and the task name below"><figcaption>The closed notch during a block. It stays the same size as always, so nothing in your menu bar gets covered.</figcaption></figure>
+          <figure><img src="images/focus-block.jpg" width="1400" height="600" loading="lazy" alt="The open Hatch panel with a focus timer at 34 minutes left, a next step field, and Today's One Thing marked In focus"><figcaption>Open Hatch for the full timer: add 10 minutes, pause, end the block, or note your next step. Music shrinks to one row.</figcaption></figure>
+          <figure><img src="images/focus-done.jpg" width="1120" height="360" loading="lazy" alt="A card saying 50 minutes, done, with buttons for a 10 minute break, another block, or done for now"><figcaption>When the block ends: take a break, go again, or stop. Anything Hatch held back is waiting here.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="stage" id="loop-interrupt">
+        <h3>3 · Meetings that don't derail you <span class="tag improved">Improved</span></h3>
+        <p>Hatch already counted down to meetings. Now, a minute before one starts, a card drops down with a <b>Join</b> button. During the call the notch shows the minutes left and turns orange in the last five, so you end on time.</p>
+      </div>
+
+      <div class="stage" id="loop-resume">
+        <h3>4 · Pick up where you left off <span class="tag new">New</span></h3>
+        <p>Getting back into a task is the hardest part of being interrupted. If a meeting starts in the middle of a focus block, its card asks where you were. One line is enough. Join pauses your block; when the meeting ends, Hatch hands your note back with the time you had left. Locking your Mac mid-block works the same way.</p>
+        <div class="shots">
+          <figure><img src="images/focus-meeting.jpg" width="1120" height="390" loading="lazy" alt="A meeting card for Design review starting in 1 minute, asking where you were, with Join and Not now buttons"><figcaption>On the way out: the meeting card gains one field. No extra card.</figcaption></figure>
+          <figure><img src="images/focus-resume.jpg" width="1120" height="270" loading="lazy" alt="A card saying Back to Ship the pricing page draft, next step Add the annual price row, 34 minutes left"><figcaption>On the way back: your note, and the rest of your block, one click away.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="stage" id="loop-close">
+        <h3>5 · Close the day <span class="tag new">New</span></h3>
+        <p>At the end of your workday, Hatch offers a short wrap-up: what you got done, how long you focused, what's still open, and an optional One Thing for tomorrow. Choose <b>Done for today</b> and Hatch goes quiet until morning. Only the reminders you set yourself still ring.</p>
+        <div class="shots">
+          <figure><img src="images/focus-wrap.jpg" width="1120" height="420" loading="lazy" alt="A wrap-up card showing 3 hours 19 minutes focused in 4 blocks, 1 done today, 4 still open, and a field for tomorrow's One Thing"><figcaption>“Not yet” brings it back once, 30 minutes later.</figcaption></figure>
+          <figure><img src="images/focus-home.jpg" width="1400" height="600" loading="lazy" alt="Hatch's Home with Today's One Thing, a Focus 50m button, upcoming meetings, and a Wrap up button"><figcaption>Home now shows your One Thing, your next meetings, and a <b>Wrap up</b> button.</figcaption></figure>
+        </div>
+        <ul class="howto">
+          <li><b>Why 18:00?</b> That's only when Hatch offers the wrap-up by itself, on weekdays. You can wrap up whenever you like with the Wrap up button on Home or Wrap Up the Day… in the Hatch menu, and change the time in Settings.</li>
+          <li>Changed your mind after “Done for today”? Click it on Home to reopen the wrap-up.</li>
+        </ul>
+      </div>
+
+      <div class="stage" id="smart-copy">
+        <h3>Smart Copy: copy it, Hatch handles the rest <span class="tag new">New</span></h3>
+        <p>Copy “send the deck to Priya tomorrow at 4:30” from Slack, Mail or anywhere, and before you've switched apps the notch offers to <b>remind you</b> or <b>add it to your calendar</b>. Copy a flight number for its status, an address to open it in Maps, or a phone number to call it.</p>
+        <div class="shots">
+          <figure><img src="images/smart-copy.jpg" width="1120" height="280" loading="lazy" alt="A card saying Copied a time: Tomorrow 16:30, Send the Q4 deck to Priya, with Remind me, Add to Calendar and Dismiss"><figcaption>One click turns a copied sentence into a reminder or a calendar event.</figcaption></figure>
+          <figure><img src="images/smart-flight.jpg" width="1120" height="280" loading="lazy" alt="A card for Flight AI 101 with a Flight status button"><figcaption>Flights, addresses and phone numbers get their own one-click step.</figcaption></figure>
+        </div>
+        <ul class="howto">
+          <li>It works entirely on your Mac and reads only what you copy, the moment you copy it. Passwords from password managers are skipped.</li>
+          <li>The card leaves by itself after a few seconds if you don't need it. Turn it off in Settings › Smart helpers.</li>
+        </ul>
+      </div>
+
+      <div class="stage" id="busy-apps">
+        <h3>Know what's draining your Mac <span class="tag new">New</span></h3>
+        <p>When an app keeps your Mac busy for minutes, or takes a huge share of its memory, the notch gives a short buzz and tells you which app it is and how much it's using, with a button to quit it or open Activity Monitor.</p>
+        <div class="shots">
+          <figure><img src="images/busy-app.jpg" width="1120" height="280" loading="lazy" alt="A card saying Google Chrome is working your Mac hard, 184% CPU for 3 minutes and 4.25 GB memory, with Quit Google Chrome, Activity Monitor and Not now"><figcaption>All of an app's helper processes are added up, so Chrome's many helpers count as Chrome.</figcaption></figure>
+        </div>
+        <ul class="howto">
+          <li><b>When does it appear?</b> When an app stays above one full CPU core for 2 minutes, or uses 40% of your memory. Short spikes are ignored, and macOS's own processes are never suggested for quitting.</li>
+          <li>At most once an hour per app. Choose “Don't warn about this app” from Not now to silence one for good, and reset that in Settings.</li>
+          <li>It waits while you're in a focus block and after you've finished for the day.</li>
+        </ul>
+      </div>
+
+      <div class="stage" id="lighter">
+        <h3>Lighter than ever <span class="tag improved">Improved</span></h3>
+        <p>Hatch now wakes only when something changes and reuses its music and browser checks instead of rebuilding them every few seconds. On our test MacBook it went from about 11% of the CPU to about 1% when idle, which means longer battery life and a cooler Mac.</p>
+      </div>
+
+      <div class="box">
+        <h3>Quiet by design</h3>
+        <ul>
+          <li><b>One thing at a time.</b> The closed notch shows a single item: a meeting, then a focus block, then music. Nothing stacks up.</li>
+          <li><b>Cards only when you need to act.</b> A card drops down for a reminder, a meeting about to start, something you just copied, an app draining your Mac, the end of a block, or the start and end of your day. Everything else waits in Hatch.</li>
+          <li><b>Cards leave on their own.</b> Each has one main button and a way out. Only reminders stay until you answer them.</li>
+          <li><b>No new tabs.</b> Everything lives on Home and in To-dos.</li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <h3>Shortcuts and settings</h3>
+        <table class="keys">
+          <tr><td><kbd>⌃⌥Space</kbd></td><td>Open or close Hatch</td></tr>
+          <tr><td><kbd>⌃⌥N</kbd></td><td>Quick capture a to-do from any app</td></tr>
+          <tr><td><kbd>⌃⌥F</kbd></td><td>Start a focus block on your One Thing, or pause and resume it</td></tr>
+          <tr><td>Settings › Smart helpers</td><td>Turn Smart Copy and busy-app warnings on or off, and reset apps you chose never to be warned about.</td></tr>
+          <tr><td>Hatch menu</td><td>Quick Capture, Start or Pause Focus, and Wrap Up the Day…</td></tr>
+          <tr><td>Settings › Focus and your day</td><td>Block length, the task under the notch, the morning question, the wrap-up and its time. You can also name Shortcuts to run when a block starts and ends, for example to turn on a macOS Focus.</td></tr>
+        </table>
+      </div>
+
+      <div class="cta"><a class="btn" href="https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg">Download Hatch 0.10</a>
+        <span>On 0.9.3 or later? Hatch installs this update by itself.</span></div>
+    </div>
+  </section>
+
+  <section class="release" id="v0.9.7">
     <div class="meta">
       <div class="version">0.9.7</div>
       <div class="date">24 October 2026</div>
-      <span class="latest">Latest</span>
     </div>
     <div>
       <h2>Always in step with your browser.</h2>
@@ -157,8 +316,6 @@
           <p>If a browser or music app is slow to answer, Hatch moves on after a few seconds instead of freezing what it shows.</p>
         </div></li>
       </ul>
-      <div class="cta"><a class="btn" href="https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg">Download Hatch 0.9.7</a>
-        <span>On 0.9.3 or later? Hatch installs this update by itself.</span></div>
     </div>
   </section>
 
