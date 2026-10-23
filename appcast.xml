@@ -4,14 +4,14 @@
     <title>Hatch</title>
     <link>https://www.myhatch.dev/</link>
     <item>
-      <title>Hatch 0.9.6</title>
-      <pubDate>Fri, 23 Oct 2026 20:03:30 GMT</pubDate>
-      <sparkle:version>0.9.6</sparkle:version>
-      <sparkle:shortVersionString>0.9.6</sparkle:shortVersionString>
+      <title>Hatch 0.9.7</title>
+      <pubDate>Fri, 23 Oct 2026 20:08:56 GMT</pubDate>
+      <sparkle:version>0.9.7</sparkle:version>
+      <sparkle:shortVersionString>0.9.7</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-      <description><![CDATA[<p>Small improvements and fixes</p>]]></description>
-      <enclosure url="https://github.com/tuhinrawat/hatch/releases/download/v0.9.6/Hatch.dmg" type="application/octet-stream"
-                 sparkle:edSignature="cfjHWlEl7fUWrn336r4Vw5VuWhOwjFggZJihf4VoyaCrOLRGeIR4fdzsWxiGnvyyp2KMk3cKPesTKIv/Xx6NCg==" length="2201945"/>
+      <description><![CDATA[<p>Hatch now keeps up when you pause or close your browser</p>]]></description>
+      <enclosure url="https://github.com/tuhinrawat/hatch/releases/download/v0.9.7/Hatch.dmg" type="application/octet-stream"
+                 sparkle:edSignature="/Cpwb5Wb3tZ1uMH5yII+mEclRRmASoKvkE4DSt8+K8O3/QegJNZSBJ0vdQ61/PgVn5WCoUuxmdMxFM7s5ntSDQ==" length="2203834"/>
     </item>
   </channel>
 </rss>

@@ -1,6 +1,6 @@
 {
-  "latest": "0.9.6",
+  "latest": "0.9.7",
   "earlyAccessOpen": true,
   "download": "https://www.myhatch.dev/download",
-  "notes": "Small improvements and fixes"
+  "notes": "Hatch now keeps up when you pause or close your browser"
 }
