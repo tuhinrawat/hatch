@@ -49,6 +49,7 @@
     <li><strong>Clipboard history</strong> is kept in memory only and is gone when Hatch quits. Items that password managers mark as private are never recorded.</li>
     <li><strong>Smart Copy</strong> checks text the moment you copy it for a time, flight, address or phone number, using macOS's built-in detection on your Mac. Nothing is sent anywhere. Private items from password managers are skipped.</li>
     <li><strong>Focus blocks and your daily plan</strong> (your One Thing, focus time and notes) are saved on your Mac only.</li>
+    <li><strong>Your watchlist</strong> (the ticker symbols you add) is saved on your Mac. If you use Finnhub or Twelve Data, your API key is kept in your Mac's Keychain.</li>
     <li><strong>Busy-app warnings</strong> look at how much CPU and memory each app uses, the same figures Activity Monitor shows. Hatch reads only these numbers and app names, never what's inside an app, and keeps nothing.</li>
   </ul>
 
@@ -56,11 +57,13 @@
   <ul>
     <li><strong>Calendar:</strong> to show today's and tomorrow's events and find meeting links, and to add an event when you choose “Add to Calendar” on a Smart Copy card. Events are read on your Mac and never sent anywhere.</li>
     <li><strong>Automation (Music, Spotify and browsers):</strong> to show and control what's playing. In browsers, Hatch reads only the playing video's title, time and artwork.</li>
+    <li><strong>Automation (Notes), only if you turn on “Save each day to Apple Notes”:</strong> to create and update one note per day in a “Hatch” folder. Hatch doesn't read your other notes.</li>
   </ul>
 
   <h2>When Hatch goes online</h2>
   <ul>
     <li><strong>Lyrics:</strong> for Music and Spotify, Hatch asks <a href="https://lrclib.net">LRCLIB</a>, a free open lyrics database, for the current song, sending its title, artist, album and length. You can turn lyrics off in Settings.</li>
+    <li><strong>Stock prices,</strong> only if you add tickers: once a minute Hatch asks your chosen provider (Yahoo Finance, Finnhub or Twelve Data) for the prices of your ticker symbols, and when you search for a ticker it sends what you typed to Yahoo Finance's search. Only the symbols, your search text and, for Finnhub or Twelve Data, your API key are sent.</li>
     <li><strong>Artwork:</strong> album art and video thumbnails are fetched from the address the player or website provides.</li>
     <li><strong>Update check:</strong> a few times a day Hatch downloads <code>myhatch.dev/version.json</code> to see whether a new version is out. The request contains nothing about you, only the app version.</li>
     <li><strong>Daily version count:</strong> once a day Hatch tells <code>myhatch.dev</code> its version number (for example "0.9.6"), so we can count how many copies are in use. Nothing else is sent: no ID, name, serial number or device details. We keep only daily totals per version, for 90 days, and don't store IP addresses.</li>

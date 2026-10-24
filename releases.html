@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What's New · Hatch</title>
-<meta name="description" content="Every Hatch release and what it means for you: the focus loop, automatic updates, live lyrics, one-click meeting joins, reminders you can't miss, and more.">
+<meta name="description" content="Every Hatch release and what it means for you: stock tickers in the notch, the focus loop, automatic updates, live lyrics, one-click meeting joins, reminders you can't miss, and more.">
 <meta property="og:title" content="What's New in Hatch">
 <meta property="og:description" content="Every Hatch release and what it means for you.">
 <meta property="og:image" content="https://www.myhatch.dev/images/hero.jpg">
@@ -173,11 +173,81 @@
 <main class="wrap">
   <!-- Newest first. Each release: one headline about the user benefit, a one-line summary, and its changes. -->
 
-  <section class="release current" id="v0.10.0">
+  <section class="release current" id="v0.11.0">
+    <div class="meta">
+      <div class="version">0.11</div>
+      <div class="date">24 October 2026</div>
+      <span class="latest">Latest</span>
+    </div>
+    <div>
+      <h2>Your watchlist, beside the camera.</h2>
+      <p class="summary">The black strip around your camera now shows your stocks when nothing else is going on. Both sides of the notch work independently, so a meeting or a song no longer pushes everything else out. And your note pad can turn lines into to-dos, reminders and calendar events, and save each day to Apple Notes.</p>
+      <ol class="loop">
+        <li><a href="#v011-stocks"><b>Stocks</b><span>Two tickers beside the camera, sliding through your list.</span></a></li>
+        <li><a href="#v011-slots"><b>Two slots</b><span>Each side of the notch shows its own thing.</span></a></li>
+        <li><a href="#v011-notes"><b>Notes to to-dos</b><span>#todo, right-click, or a time in a line.</span></a></li>
+        <li><a href="#v011-calendar"><b>Calendar times</b><span>Pick the start and end before adding.</span></a></li>
+        <li><a href="#v011-apple-notes"><b>Apple Notes</b><span>Each day's notes, kept in Notes.</span></a></li>
+      </ol>
+
+      <div class="stage" id="v011-stocks">
+        <h3>Stock tickers in the notch <span class="tag new">New</span></h3>
+        <p>Add the stocks and indices you follow, from AAPL to RELIANCE or the NIFTY 50, and they appear beside the camera, one each side, with the price and today's change. Every few seconds both slide up to the next pair. Point at the notch and they hold still; click one to open its chart.</p>
+        <div class="shots">
+          <figure><img src="images/stocks-wings.jpg" width="1120" height="192" loading="lazy" alt="The closed notch showing AAPL 347.73 down 0.1% on the left and TSLA 372.22 down 0.6% on the right"><figcaption>Wider, never taller: the notch keeps its height; only its sides stretch to fit a ticker each.</figcaption></figure>
+          <figure><img src="images/stocks-watchlist.jpg" width="1400" height="620" loading="lazy" alt="Hatch open with a Watchlist row along the bottom showing AAPL, TSLA, RELIANCE and NIFTY 50 with prices, changes and small price lines"><figcaption>Open Hatch to see your whole watchlist at once, with a line of today's prices for each.</figcaption></figure>
+        </div>
+        <ul class="howto">
+          <li><b>Set it up</b> in Settings › Stocks: search for a company or index, add up to 12, and drag them into the order you like.</li>
+          <li><b>Prices</b> come from Yahoo Finance with no account needed, or from Finnhub or Twelve Data with a free API key, which Hatch keeps in your Keychain. They refresh every minute and may be delayed by up to 15 minutes.</li>
+          <li><b>Charts</b> open in TradingView, Google Finance or Yahoo Finance, your choice. (Google Finance and TradingView don't offer prices to apps, so they're used for charts.)</li>
+          <li>Prefer to keep the left side free for menus? Choose “Right side only”. You can also show tickers only while the market is open.</li>
+        </ul>
+      </div>
+
+      <div class="stage" id="v011-slots">
+        <h3>Both sides of the notch, working independently <span class="tag improved">Improved</span></h3>
+        <p>Each side of the notch is now its own slot. The most important thing takes the right side and the next takes the left, so a meeting countdown and your music can show at the same time. Your tickers fill whichever side is free, one at a time when the other side is busy. Only things that need you right now, like a reminder, take over the whole notch.</p>
+        <div class="shots">
+          <figure><img src="images/stocks-share.jpg" width="1120" height="192" loading="lazy" alt="The closed notch with AAPL on the left and a meeting countdown, in 5 minutes, on the right"><figcaption>A meeting coming up takes the right side; your tickers keep going on the left.</figcaption></figure>
+          <figure><img src="images/wings-focus-music.jpg" width="1120" height="230" loading="lazy" alt="The closed notch with album art and a waveform on the left and a focus ring with 35 minutes left on the right, and the task underneath"><figcaption>A focus block and your music, side by side.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="stage" id="v011-notes">
+        <h3>Notes that turn into to-dos <span class="tag new">New</span></h3>
+        <p>Start a line with <b>#todo</b> and press Return: it's added to your to-dos and marked ☐ in the note. Or select any text, right-click and choose <b>Add to To-dos</b>. Mention a time in a line, like “lunch with Sam tomorrow at 1pm”, and a bar appears under the note offering a reminder or a calendar event.</p>
+        <div class="shots">
+          <figure><img src="images/notes-todo.jpg" width="1400" height="600" loading="lazy" alt="The Notes tab with a launch checklist where two lines are marked as to-dos, and the Save each day to Apple Notes option ticked"><figcaption>Lines marked ☐ are in your To-dos, where you can add reminders and tick them off.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="stage" id="v011-calendar">
+        <h3>Add to Calendar asks for the time <span class="tag improved">Improved</span></h3>
+        <p>When you add an event from Smart Copy or a note, Hatch now shows the title, start and end first, set to half an hour unless you change it, so the event lands in your calendar exactly as you want.</p>
+        <div class="shots">
+          <figure><img src="images/smart-calendar.jpg" width="1120" height="390" loading="lazy" alt="A card titled Add to Calendar with the event name, a start date and time, an end time, 30 minutes, and Add and Cancel buttons"><figcaption>Moving the start keeps the event's length.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="stage" id="v011-apple-notes">
+        <h3>Each day's notes, kept in Apple Notes <span class="tag new">New</span></h3>
+        <p>Tick <b>Save each day to Apple Notes</b> at the bottom of the Notes tab and Hatch keeps one note per day, like “Hatch · Saturday 24 October 2026”, in a Hatch folder, updated as you type. Each morning the pad starts fresh, and yesterday stays safe in Notes, so your notes build up into a journal you can search.</p>
+        <ul class="howto">
+          <li>macOS asks once to let Hatch use Notes. If that permission is turned off, the Notes tab tells you where to turn it back on.</li>
+          <li>The pad is cleared only after the previous day is safely saved.</li>
+        </ul>
+      </div>
+
+      <div class="cta"><a class="btn" href="https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg">Download Hatch 0.11</a>
+        <span>On 0.9.3 or later? Hatch installs this update by itself.</span></div>
+    </div>
+  </section>
+
+  <section class="release" id="v0.10.0">
     <div class="meta">
       <div class="version">0.10</div>
       <div class="date">24 October 2026</div>
-      <span class="latest">Latest</span>
     </div>
     <div>
       <h2>Get more done, with less noise.</h2>
@@ -293,8 +363,6 @@
         </table>
       </div>
 
-      <div class="cta"><a class="btn" href="https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg">Download Hatch 0.10</a>
-        <span>On 0.9.3 or later? Hatch installs this update by itself.</span></div>
     </div>
   </section>
 
