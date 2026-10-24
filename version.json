@@ -1,6 +1,6 @@
 {
-  "latest": "0.11.0",
+  "latest": "0.11.1",
   "earlyAccessOpen": true,
   "download": "https://www.myhatch.dev/download",
-  "notes": "Stock tickers beside the camera, both sides of the notch working independently, and notes that turn into to-dos"
+  "notes": "Add to Calendar in Smart Copy now opens instantly"
 }
