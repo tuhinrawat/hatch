@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your licence · Hatch</title>
+<meta name="description" content="Your Hatch Pro licence key. Paste it into Hatch › Settings › Hatch Pro to unlock everything, forever and offline.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  :root { --bg: #07070b; --line: rgba(255,255,255,0.08); --text: #f4f4f7; --muted: #a1a1b0; --accent: #ff7a59; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #ffb199; }
+  .wrap { width: min(640px, 100% - 32px); margin: 0 auto; }
+  header { border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; text-decoration: none; color: var(--text); }
+  .brand img { width: 30px; height: 30px; }
+  main { padding: 56px 0 80px; }
+  h1 { font-size: clamp(30px, 6vw, 44px); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 8px; }
+  p { color: var(--muted); }
+  strong { color: var(--text); }
+  .card { border: 1px solid rgba(255,122,89,0.4); background: rgba(255,122,89,0.06); border-radius: 18px; padding: 22px 24px; margin: 28px 0; }
+  .key { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 13px; word-break: break-all;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: 12px; padding: 14px; color: var(--text); margin: 0 0 14px; }
+  button { font: inherit; font-weight: 600; color: #150a06; background: var(--accent); border: 0; border-radius: 10px; padding: 10px 18px; cursor: pointer; }
+  button:disabled { opacity: 0.5; cursor: default; }
+  .muted { color: var(--muted); font-size: 14px; }
+  ol { color: var(--muted); } ol strong { color: var(--text); }
+  footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: #6c6c7c; font-size: 14px; }
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="/"><img src="images/app-icon.png" alt="">Hatch</a></div></header>
+<main class="wrap">
+  <h1>Thank you 🎉</h1>
+  <p>Your Hatch Pro licence is ready. It unlocks every feature, forever — verified right on your Mac, with no account and no sign-in.</p>
+
+  <div class="card">
+    <div id="state" class="muted">Loading your licence…</div>
+    <div id="keyBox" class="key" hidden></div>
+    <button id="copy" hidden>Copy licence key</button>
+  </div>
+
+  <ol>
+    <li>Copy the key above.</li>
+    <li>Open <strong>Hatch</strong> → the <strong>⚙︎ Settings</strong> button → <strong>Hatch Pro</strong>.</li>
+    <li>Paste it into <strong>“Paste your licence key”</strong> and click <strong>Activate</strong>.</li>
+  </ol>
+  <p class="muted">Keep this key safe — it's your proof of purchase, and you can reuse it on any Mac you own. Lost it? <a href="/feedback">Contact us</a> with your order email.</p>
+</main>
+<footer><div class="wrap">Hatch · <a href="/">Home</a> · <a href="/privacy">Privacy</a></div></footer>
+<script>
+  (function () {
+    var params = new URLSearchParams(location.search);
+    var order = params.get("order") || params.get("payment_id") || params.get("subscription_id");
+    var state = document.getElementById("state");
+    var keyBox = document.getElementById("keyBox");
+    var copy = document.getElementById("copy");
+    if (!order) { state.textContent = "No order found in this link. Check your purchase email for your licence key."; return; }
+
+    var tries = 0;
+    function poll() {
+      tries++;
+      fetch("/api/license?order=" + encodeURIComponent(order))
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+        .then(function (data) {
+          state.hidden = true;
+          keyBox.textContent = data.license;
+          keyBox.hidden = false;
+          copy.hidden = false;
+        })
+        .catch(function () {
+          // The webhook may land a moment after the redirect; retry briefly.
+          if (tries < 10) { setTimeout(poll, 1500); }
+          else { state.textContent = "Your licence is taking a moment. It's also in your purchase email — or refresh this page shortly."; }
+        });
+    }
+    copy.addEventListener("click", function () {
+      navigator.clipboard.writeText(keyBox.textContent).then(function () {
+        copy.textContent = "Copied ✓";
+        setTimeout(function () { copy.textContent = "Copy licence key"; }, 1600);
+      });
+    });
+    poll();
+  })();
+</script>
+</body>
+</html>

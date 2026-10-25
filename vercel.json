@@ -1,19 +1,50 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/download", "destination": "https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg", "permanent": false },
-    { "source": "/feedback", "destination": "https://github.com/tuhinrawat/hatch/issues/new", "permanent": false }
+    {
+      "source": "/download",
+      "destination": "https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg",
+      "permanent": false
+    },
+    {
+      "source": "/feedback",
+      "destination": "https://github.com/tuhinrawat/hatch/issues/new",
+      "permanent": false
+    },
+    {
+      "source": "/buy",
+      "destination": "https://checkout.dodopayments.com/buy/PLACEHOLDER_DODO_PRODUCT_ID?redirect_url=https://www.myhatch.dev/activated",
+      "permanent": false
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" }
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains"
+        }
       ]
     }
   ]
