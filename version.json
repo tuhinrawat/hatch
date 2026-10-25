@@ -1,6 +1,6 @@
 {
-  "latest": "0.11.1",
+  "latest": "0.12.0",
   "earlyAccessOpen": true,
   "download": "https://www.myhatch.dev/download",
-  "notes": "Add to Calendar in Smart Copy now opens instantly"
+  "notes": "Themes and glow, snippets, screenshot shelf, Shortcuts launcher, keep-awake, Tray thumbnails, better lyrics, and on/off switches for every feature"
 }

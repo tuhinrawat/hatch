@@ -4,14 +4,14 @@
     <title>Hatch</title>
     <link>https://www.myhatch.dev/</link>
     <item>
-      <title>Hatch 0.11.1</title>
-      <pubDate>Sat, 24 Oct 2026 05:17:02 GMT</pubDate>
-      <sparkle:version>0.11.1</sparkle:version>
-      <sparkle:shortVersionString>0.11.1</sparkle:shortVersionString>
+      <title>Hatch 0.12.0</title>
+      <pubDate>Sun, 25 Oct 2026 10:41:57 GMT</pubDate>
+      <sparkle:version>0.12.0</sparkle:version>
+      <sparkle:shortVersionString>0.12.0</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-      <description><![CDATA[<p>Add to Calendar in Smart Copy now opens instantly</p>]]></description>
-      <enclosure url="https://github.com/tuhinrawat/hatch/releases/download/v0.11.1/Hatch.dmg" type="application/octet-stream"
-                 sparkle:edSignature="N76VAP4PHs8JOC/8UHgXt9SBhbLAbzEN3LHe1ciQr7PPNK0ADuhdIm2wTl1OR9585wtvKSqAMJBIAI8FD5WDAQ==" length="2839667"/>
+      <description><![CDATA[<p>Themes and glow, snippets, screenshot shelf, Shortcuts launcher, keep-awake, Tray thumbnails, better lyrics, and on/off switches for every feature</p>]]></description>
+      <enclosure url="https://github.com/tuhinrawat/hatch/releases/download/v0.12.0/Hatch.dmg" type="application/octet-stream"
+                 sparkle:edSignature="Z4fAtZn9qDbZwsUTBZp17AxfXxNyhkP+N2GBrEbG/2Vd+sTSbFS08shmsjO/qxR9qkw7QRwB37x2bnlSFc8uAA==" length="3017542"/>
     </item>
   </channel>
 </rss>
