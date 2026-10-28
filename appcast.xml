@@ -4,14 +4,14 @@
     <title>Hatch</title>
     <link>https://www.myhatch.dev/</link>
     <item>
-      <title>Hatch 0.13.0</title>
-      <pubDate>Wed, 28 Oct 2026 13:33:38 GMT</pubDate>
-      <sparkle:version>0.13.0</sparkle:version>
-      <sparkle:shortVersionString>0.13.0</sparkle:shortVersionString>
+      <title>Hatch 0.13.1</title>
+      <pubDate>Wed, 28 Oct 2026 14:30:55 GMT</pubDate>
+      <sparkle:version>0.13.1</sparkle:version>
+      <sparkle:shortVersionString>0.13.1</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
       <description><![CDATA[<p>Bug fixes and improvements.</p>]]></description>
-      <enclosure url="https://github.com/tuhinrawat/hatch/releases/download/v0.13.0/Hatch.dmg" type="application/octet-stream"
-                 sparkle:edSignature="w4Ce8yMHd7ayO1JDHRuEke/49ieMX3Htqu3hW0lpLjHhISfgQrPLtrSoMkLC/G4Tvall7kt+K1/BwnFMHijtDQ==" length="3121629"/>
+      <enclosure url="https://github.com/tuhinrawat/hatch/releases/download/v0.13.1/Hatch.dmg" type="application/octet-stream"
+                 sparkle:edSignature="2JlcwJIh5B2Vjt2E7jkqdZQQQ9Lr2vwIw2+NQT6rZXgoQIiT2m7Noa2lABOXJF+K/3egOr0sulN+i+ZOlzoZCg==" length="3309733"/>
     </item>
   </channel>
 </rss>
