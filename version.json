@@ -1,6 +1,6 @@
 {
-  "latest": "0.13.0",
+  "latest": "0.13.1",
   "earlyAccessOpen": true,
   "download": "https://www.myhatch.dev/download",
-  "notes": "A new look for the open notch — Frosted or Apple's Liquid Glass (Settings › Theme) — and Hatch is now signed and notarized by Apple, so it installs with no security warning."
+  "notes": "Fixes Calendar access on the signed build (grant it and it works right away), and adds a Quit button in the notch and Settings."
 }
