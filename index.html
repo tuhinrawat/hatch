@@ -84,6 +84,21 @@
   .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 34px -10px rgba(255, 122, 89, 0.75); }
   .btn.small { padding: 8px 16px; font-size: 14px; }
   .btn.ghost { background: transparent; border: 1px solid var(--line); box-shadow: none; }
+  /* Apple-style download badge: logo + two-line label, like a native Mac button. */
+  .btn-download {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 11px 24px; border-radius: 16px; text-decoration: none; color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 12px 34px -10px rgba(255, 122, 89, 0.6);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-download:hover { transform: translateY(-1px); box-shadow: 0 16px 40px -10px rgba(255, 122, 89, 0.78); }
+  .btn-download .apple { width: 26px; height: 26px; flex: none; }
+  .btn-download .labels { display: flex; flex-direction: column; line-height: 1.05; text-align: left; }
+  .btn-download .labels small { font-size: 11px; font-weight: 500; opacity: .92; letter-spacing: .02em; }
+  .btn-download .labels strong { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
+  .dl-trust { display: inline-flex; align-items: center; gap: 7px; margin: 14px 0 0; color: var(--muted); font-size: 13.5px; }
+  .dl-trust svg { width: 15px; height: 15px; flex: none; color: #30d158; }
 
   .whats-new {
     display: table; margin: 0 auto 14px; padding: 6px 14px; border-radius: 999px;
@@ -355,9 +370,16 @@
     <h1>Your notch,<br><span class="grad">put to work.</span></h1>
     <p class="lede">Hatch turns your MacBook's notch into a calm command centre: plan and focus, never miss a meeting, keep your music at hand, and get a nudge only when something needs you.</p>
     <div class="cta">
-      <a class="btn" href="https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg">Download Hatch for Mac</a>
+      <a class="btn-download" href="https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg">
+        <svg class="apple" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        <span class="labels"><small>Download for</small><strong>macOS</strong></span>
+      </a>
       <a class="btn ghost" href="#features">See what it does</a>
     </div>
+    <p class="dl-trust">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      Signed &amp; notarized by Apple · macOS 14+ · Apple silicon
+    </p>
     <p class="fine">No account, no subscription. Free until Hatch 1.0 launches, then $4.99 once.</p>
     <a class="vt-badge" href="https://www.virustotal.com/gui/file/a012f4b69f98f8af0ac8ffd74433423bd3074f2e35465702eb71487071af981c">
       <span class="vt-check" aria-hidden="true">✓</span>
