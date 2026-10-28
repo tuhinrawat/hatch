@@ -1,6 +1,6 @@
 {
-  "latest": "0.12.0",
+  "latest": "0.13.0",
   "earlyAccessOpen": true,
   "download": "https://www.myhatch.dev/download",
-  "notes": "Themes and glow, snippets, screenshot shelf, Shortcuts launcher, keep-awake, Tray thumbnails, better lyrics, and on/off switches for every feature"
+  "notes": "A new look for the open notch — Frosted or Apple's Liquid Glass (Settings › Theme) — and Hatch is now signed and notarized by Apple, so it installs with no security warning."
 }
