@@ -643,15 +643,14 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Install in a minute.</h2>
-      <p>This early-access build isn't notarized by Apple yet, so macOS asks you to approve it once.</p>
+      <p>Signed and notarized by Apple, so it opens straight away — no security warnings.</p>
     </div>
     <div class="steps">
       <div class="step"><h4>Download</h4><p>Click <strong>Download</strong> to get <strong>Hatch.dmg</strong>, then open it.</p></div>
       <div class="step"><h4>Drag to Applications</h4><p>Drag Hatch onto the Applications folder, then open it from there.</p></div>
-      <div class="step"><h4>Click Open Anyway</h4><p>macOS says it "could not verify" Hatch. Click Done, then go to <strong>System Settings › Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>.</p></div>
       <div class="step"><h4>Allow access</h4><p>Allow Calendar and media control when asked. Hatch is now living in your notch.</p></div>
     </div>
-    <p class="note">You only approve it once. Releases after launch will be notarized by Apple and open straight away.</p>
+    <p class="note">Hatch keeps itself up to date automatically — new versions install in the background.</p>
   </div>
 </section>
 
@@ -659,13 +658,13 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Is Hatch <span class="grad">safe to install?</span></h2>
-      <p>Fair question, since macOS warns you about it. Here's exactly why, and how you can check for yourself.</p>
+      <p>Short answer: yes. It's notarized by Apple, checked by antivirus engines, and you can verify every download yourself.</p>
     </div>
     <div class="cards">
       <div class="card">
-        <div class="icon">🧾</div>
-        <h4>Why macOS warns you</h4>
-        <p>Apple's notarization costs $99 a year. Hatch is an independent app in free early access, so this build isn't notarized yet. That means Apple hasn't scanned it, not that anything is wrong with it. Paid releases will be notarized.</p>
+        <div class="icon">🛡️</div>
+        <h4>Notarized by Apple</h4>
+        <p>Every release is signed with an Apple Developer ID and notarized — Apple scans each build for malware before it ships, so Hatch installs cleanly, with no security warning.</p>
       </div>
       <div class="card">
         <div class="icon">🔍</div>
@@ -704,14 +703,14 @@
         <strong>Early access</strong>
         <div class="price">Free</div>
         <p>Every feature, free until Hatch 1.0 launches (by 31 March 2027 at the latest).</p>
-        <ul><li>All features included</li><li>In-app update notifications</li><li>Help shape what's next</li></ul>
+        <ul><li>All features included</li><li>Signed &amp; notarized by Apple</li><li>Help shape what's next</li></ul>
         <a class="btn" href="https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg">Download free</a>
       </div>
       <div class="plan">
         <strong>After launch</strong>
         <div class="price">$4.99 <small>one time</small></div>
         <p>7-day free trial, then a single payment.</p>
-        <ul><li>Lifetime license for your Macs</li><li>Works offline, no account</li><li>Signed and notarized by Apple</li></ul>
+        <ul><li>Lifetime license for your Macs</li><li>Works offline, no account</li><li>Free updates, forever</li></ul>
         <a class="btn ghost" href="#faq">Coming soon</a>
       </div>
     </div>
@@ -722,11 +721,11 @@
   <div class="wrap faq">
     <div class="section-head"><h2>Questions</h2></div>
     <details><summary>Which Macs does Hatch work on?</summary><p>Any Apple silicon Mac running macOS Sonoma (14) or later. It shines on MacBooks with a notch; on other displays it lives at the top centre of the screen.</p></details>
-    <details><summary>Why does macOS say it can't verify Hatch?</summary><p>Early-access builds aren't notarized by Apple yet, so macOS asks you to approve the app once in System Settings › Privacy &amp; Security. Releases after launch will be notarized and open without the warning.</p></details>
+    <details><summary>Is Hatch notarized by Apple?</summary><p>Yes. Every release is signed with an Apple Developer ID and notarized by Apple, which scans each build for malware. Hatch installs and opens cleanly, with no "unidentified developer" warning.</p></details>
     <details><summary>How do lyrics work?</summary><p>For Apple Music and Spotify, Hatch looks up time-synced lyrics on LRCLIB, a free, open lyrics database, sending only the song's title, artist, album and length. You can turn lyrics off in Settings.</p></details>
     <details><summary>How does YouTube and browser media work?</summary><p>Load the included browser extension in Chrome, Brave, Edge or Arc. Or turn on "Allow JavaScript from Apple Events" once in the browser (Chrome: View › Developer; Safari: Develop menu). Hatch only reads the playing video's title, time and artwork.</p></details>
     <details><summary>What data does Hatch collect?</summary><p>Nothing that identifies you. The app has no accounts and no tracking. Once a day it reports only its version number, so we know how many copies are in use; there's no ID, name or device information. Clipboard history stays in memory, and your to-dos, notes and tray files stay on your Mac. This website counts visits with Vercel Web Analytics, which uses no cookies and stores no personal data. See the <a href="/privacy">privacy page</a>.</p></details>
-    <details><summary>How do updates work?</summary><p>From version 0.9.3, Hatch updates itself: it downloads new versions in the background and installs them the next time it quits, so you won't see the security prompt again. Every update is verified with Hatch's signature before it installs. You can turn this off in Settings › Updates.</p></details>
+    <details><summary>How do updates work?</summary><p>From version 0.9.3, Hatch updates itself: it downloads new versions in the background and installs them the next time it quits. Every update is verified with Hatch's signature before it installs. You can turn this off in Settings › Updates.</p></details>
     <details><summary>How do I send feedback or report a bug?</summary><p>In Hatch, open the menu bar icon and choose <strong>Send Feedback…</strong>. It opens a GitHub issue with your Hatch and macOS versions filled in. You can also go to <a href="/feedback">myhatch.dev/feedback</a>.</p></details>
     <details><summary>What happens when early access ends?</summary><p>Early access is free until Hatch 1.0 launches, and no later than 31 March 2027. When it ends, early-access builds show a message inviting you to Hatch 1.0, which has a 7-day free trial and then a one-time $4.99 purchase. Your reminders keep working in the meantime. Licenses are verified on your Mac, so once you've bought it, it works for good.</p></details>
   </div>
