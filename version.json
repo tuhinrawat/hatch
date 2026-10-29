@@ -1,6 +1,6 @@
 {
-  "latest": "0.13.1",
+  "latest": "0.14.0",
   "earlyAccessOpen": true,
   "download": "https://www.myhatch.dev/download",
-  "notes": "Fixes Calendar access on the signed build (grant it and it works right away), and adds a Quit button in the notch and Settings."
+  "notes": "New: keyboard sounds \u2014 give your keyboard a clicky voice through your Mac's speakers, with quirky, professional, ambient and classic mechanical-switch packs. Turn it on in Settings."
 }

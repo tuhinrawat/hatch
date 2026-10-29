@@ -24,7 +24,7 @@
   "url": "https://www.myhatch.dev/",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "macOS 14 or later (Apple silicon)",
-  "softwareVersion": "0.13.1",
+  "softwareVersion": "0.14.0",
   "downloadUrl": "https://github.com/tuhinrawat/hatch/releases/latest/download/Hatch.dmg",
   "image": "https://www.myhatch.dev/images/hero.jpg",
   "description": "Hatch turns your MacBook's notch into a calm command centre: focus blocks with a daily plan and wrap-up, one-click meeting joins, to-dos with reminders and quick capture, now playing with time-synced lyrics, Smart Copy, busy-app warnings, stock tickers, notes that become to-dos, a file tray and clipboard history.",
@@ -248,35 +248,58 @@
   .live-card strong { display: block; font-size: 17px; }
   .live-card span { color: var(--muted); font-size: 15px; }
 
-  /* Feature rows */
-  /* Feature categories: a jump grid, then one section per category. */
-  .cat-nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-  .cat-nav a {
-    display: flex; flex-direction: column; gap: 6px; text-decoration: none; background: var(--panel);
-    border: 1px solid var(--line); border-radius: var(--radius); padding: 22px;
-  }
-  .cat-nav a:hover { border-color: rgba(255,255,255,0.22); }
-  .cat-nav b { font-size: 17px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .cat-nav span { color: var(--muted); font-size: 14.5px; }
-  .cat-nav .cat-icon { font-size: 22px; color: var(--text); }
+  /* Feature explorer: a 30% vertical "thread" of features, and a sliding panel. */
   .new-pill {
     font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
     padding: 2px 8px; border-radius: 999px; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2));
   }
-  section.cat { padding-top: 40px; scroll-margin-top: 64px; }
-  .cat-head { text-align: center; max-width: 720px; margin: 0 auto 8px; }
-  .cat-head h2 { font-size: clamp(32px, 5vw, 48px); line-height: 1.08; letter-spacing: -0.03em; margin: 12px 0 10px; }
-  .cat-head p { color: var(--muted); font-size: 18px; margin: 0; }
-  .feature { display: grid; grid-template-columns: 1fr 1.35fr; gap: 56px; align-items: center; padding: 56px 0; }
-  .feature.flip { grid-template-columns: 1.35fr 1fr; }
-  .feature.flip .copy { order: 2; }
-  .tag { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
-  .feature h3 { font-size: clamp(26px, 3.2vw, 36px); line-height: 1.15; letter-spacing: -0.02em; margin: 10px 0 14px; }
-  .feature p { color: var(--muted); font-size: 17px; margin: 0 0 16px; }
-  .feature ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-  .feature li { display: flex; gap: 10px; color: var(--text); font-size: 15.5px; }
-  .feature li::before { content: "✓"; color: var(--accent); font-weight: 700; }
+  .explorer { display: grid; grid-template-columns: minmax(220px, 30%) 1fr; gap: 48px; align-items: start; }
+  .thread { position: sticky; top: 84px; display: flex; flex-direction: column; gap: 26px; }
+  .thread-cat {
+    margin: 0 0 6px; padding-left: 26px; font-size: 12px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--faint); display: flex; gap: 8px; align-items: center;
+  }
+  .thread-cat .new-pill { letter-spacing: .05em; }
+  .thread-items { position: relative; display: flex; flex-direction: column; }
+  .thread-items::before {
+    content: ""; position: absolute; left: 6px; top: 16px; bottom: 16px; width: 2px;
+    background: var(--line); border-radius: 2px;
+  }
+  .thread-item {
+    all: unset; box-sizing: border-box; cursor: pointer; position: relative; width: 100%;
+    padding: 10px 12px 10px 28px; border-radius: 10px; color: var(--muted);
+    font-size: 15px; line-height: 1.3; transition: color .15s ease, background .15s ease;
+  }
+  .thread-item::before {
+    content: ""; position: absolute; left: 1px; top: 50%; transform: translateY(-50%);
+    width: 12px; height: 12px; border-radius: 50%; background: var(--bg);
+    border: 2px solid var(--faint); transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .thread-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+  .thread-item.active { color: var(--text); font-weight: 600; }
+  .thread-item.active::before { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 0 4px rgba(255,122,89,0.16); }
+  .thread-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .panels { position: relative; min-height: 440px; }
+  .panel { display: none; }
+  .panel.active { display: block; animation: panelIn .42s cubic-bezier(.2,.8,.2,1); }
+  @keyframes panelIn { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+  .panel .tag { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  .panel h3 { font-size: clamp(26px, 3.2vw, 34px); line-height: 1.15; letter-spacing: -0.02em; margin: 10px 0 14px; }
+  .panel > p { color: var(--muted); font-size: 17px; margin: 0 0 18px; max-width: 640px; }
+  .panel ul { list-style: none; padding: 0; margin: 0 0 26px; display: grid; gap: 10px; max-width: 640px; }
+  .panel li { display: flex; gap: 10px; color: var(--text); font-size: 15.5px; }
+  .panel li::before { content: "✓"; color: var(--accent); font-weight: 700; }
   .stack { display: grid; gap: 16px; }
+  /* Keyboard-sounds illustration (no screenshot yet) */
+  .kbd-art {
+    background: radial-gradient(120% 100% at 80% 0%, rgba(255,122,89,0.10), transparent 60%),
+                linear-gradient(160deg, #15151f, #0b0b11);
+    border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 24px;
+  }
+  .kbd-art svg { width: 100%; height: auto; }
+  .kbd-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 18px; }
+  .kbd-chips span { font-size: 13px; color: var(--muted); padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,0.03); }
 
   /* Small feature cards */
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -336,10 +359,10 @@
   @media (max-width: 860px) {
     nav .btn { margin-left: auto; }
     .live-grid { grid-template-columns: 1fr; }
-    .cat-nav { grid-template-columns: 1fr 1fr; }
     nav .links { display: none; }
-    .feature, .feature.flip { grid-template-columns: 1fr; gap: 28px; padding: 36px 0; }
-    .feature.flip .copy { order: 0; }
+    .explorer { grid-template-columns: 1fr; gap: 26px; }
+    .thread { position: static; top: auto; gap: 20px; }
+    .panels { min-height: 0; }
     .cards, .steps, .pricing, .verify { grid-template-columns: 1fr; }
     section { padding: 64px 0; }
     header.hero { padding-top: 64px; }
@@ -381,7 +404,7 @@
       Signed &amp; notarized by Apple · macOS 14+ · Apple silicon
     </p>
     <p class="fine">No account, no subscription. Free until Hatch 1.0 launches, then $4.99 once.</p>
-    <a class="vt-badge" href="https://www.virustotal.com/gui/file/988952b9d4a35109cb729a4008686a723c442cfb18ba8f4536c10a72bf84f242">
+    <a class="vt-badge" href="https://www.virustotal.com/gui/file/f90365fe6b15f24421f2d223eeeb67702dd02a189fe7c654fe601347e9e9585e">
       <span class="vt-check" aria-hidden="true">✓</span>
       <span><strong><!--vtscore-->0/60<!--/vtscore--></strong> antivirus engines flagged Hatch on VirusTotal</span>
       <span class="vt-link">View report →</span>
@@ -413,214 +436,252 @@
 <section id="features">
   <div class="wrap">
     <div class="section-head">
-      <h2>Four things Hatch <span class="grad">does for you.</span></h2>
-      <p>Everything lives in the notch, shows one thing at a time, and gets out of your way.</p>
+      <h2>Everything Hatch <span class="grad">does for you.</span></h2>
+      <p>Pick a feature — it lives in the notch, shows one thing at a time, and gets out of your way.</p>
     </div>
-    <div class="cat-nav">
-      <a href="#focus"><span class="cat-icon" aria-hidden="true">◎</span><b>Focus &amp; your day <em class="new-pill">New</em></b><span>Plan, focus, pick up where you left off, close the day.</span></a>
-      <a href="#on-time"><span class="cat-icon" aria-hidden="true">⏰</span><b>Never miss a thing</b><span>One-click meetings, reminders that ring, quick capture.</span></a>
-      <a href="#music"><span class="cat-icon" aria-hidden="true">♪</span><b>At a glance <em class="new-pill">New</em></b><span>Music with live lyrics, and your stock watchlist beside the camera.</span></a>
-      <a href="#helpers"><span class="cat-icon" aria-hidden="true">✦</span><b>Smart helpers</b><span>Smart Copy, busy-app warnings, notes that become to-dos, files and clipboard.</span></a>
-    </div>
-  </div>
-</section>
+    <div class="explorer">
+      <nav class="thread" role="tablist" aria-label="Hatch features" aria-orientation="vertical">
+        <div class="thread-group">
+          <p class="thread-cat">Focus &amp; your day <em class="new-pill">New</em></p>
+          <div class="thread-items">
+            <button class="thread-item active" role="tab" aria-selected="true" aria-controls="panel-focus-time" data-feat="focus-time">Time you can see</button>
+            <button class="thread-item" role="tab" aria-selected="false" aria-controls="panel-focus-resume" data-feat="focus-resume">Pick up where you left off</button>
+            <button class="thread-item" role="tab" aria-selected="false" aria-controls="panel-focus-plan" data-feat="focus-plan">Plan &amp; wrap up the day</button>
+          </div>
+        </div>
+        <div class="thread-group">
+          <p class="thread-cat">Never miss a thing</p>
+          <div class="thread-items">
+            <button class="thread-item" role="tab" aria-selected="false" aria-controls="panel-meetings" data-feat="meetings">Join meetings in one click</button>
+            <button class="thread-item" role="tab" aria-selected="false" aria-controls="panel-reminders" data-feat="reminders">Reminders you can't ignore</button>
+          </div>
+        </div>
+        <div class="thread-group">
+          <p class="thread-cat">At a glance <em class="new-pill">New</em></p>
+          <div class="thread-items">
+            <button class="thread-item" role="tab" aria-selected="false" aria-controls="panel-music" data-feat="music">Now playing &amp; live lyrics</button>
+            <button class="thread-item" role="tab" aria-selected="false" aria-controls="panel-stocks" data-feat="stocks">Your stock watchlist</button>
+          </div>
+        </div>
+        <div class="thread-group">
+          <p class="thread-cat">Smart helpers</p>
+          <div class="thread-items">
+            <button class="thread-item" role="tab" aria-selected="false" aria-controls="panel-smartcopy" data-feat="smartcopy">Smart Copy</button>
+            <button class="thread-item" role="tab" aria-selected="false" aria-controls="panel-busy" data-feat="busy">Know what's draining your Mac</button>
+            <button class="thread-item" role="tab" aria-selected="false" aria-controls="panel-notes" data-feat="notes">Notes, files &amp; clipboard</button>
+          </div>
+        </div>
+        <div class="thread-group">
+          <p class="thread-cat">Make it yours <em class="new-pill">New</em></p>
+          <div class="thread-items">
+            <button class="thread-item" role="tab" aria-selected="false" aria-controls="panel-keyboard" data-feat="keyboard">Keyboard sounds</button>
+          </div>
+        </div>
+      </nav>
 
-<!-- 1. Focus & your day -->
-<section class="cat" id="focus">
-  <div class="wrap">
-    <div class="cat-head">
-      <span class="eyebrow">Focus &amp; your day · new in 0.10</span>
-      <h2>Get more done, <span class="grad">with less noise.</span></h2>
-      <p>A simple loop for every workday: decide what matters, focus on it, survive the interruptions, and stop on time.</p>
-    </div>
-    <div class="feature">
-      <div class="copy">
-        <span class="tag">Focus</span>
-        <h3>Time you can see.</h3>
-        <p>Start a 25, 50 or 90 minute block from Home or with <kbd>⌃</kbd><kbd>⌥</kbd><kbd>F</kbd>. A ring around the notch fills as time passes, with your task underneath. While you focus, Hatch holds its own alerts until the block ends.</p>
-        <ul>
-          <li>Your reminders and meetings still come through</li>
-          <li>Add 10 minutes, pause, or note your next step</li>
-          <li>Can switch a macOS Focus on and off with Shortcuts</li>
-        </ul>
-      </div>
-      <div class="stack">
-        <div class="shot"><img src="images/focus-closed.jpg" alt="The closed notch with a focus ring, 35 minutes left and the task name underneath" loading="lazy" width="880" height="192"></div>
-        <div class="shot"><img src="images/focus-block.jpg" alt="Hatch open during a focus block: a timer with 34 minutes left, a next step field, and the One Thing marked In focus" loading="lazy" width="1400" height="600"></div>
-      </div>
-    </div>
-    <div class="feature flip">
-      <div class="copy">
-        <span class="tag">Resume</span>
-        <h3>Pick up exactly where you left off.</h3>
-        <p>When a meeting starts mid-block, its card asks where you were. One line is enough. When the meeting ends, Hatch hands your note back, with the time you had left.</p>
-        <ul>
-          <li>No extra card: the meeting card just gains one field</li>
-          <li>Works when you lock your Mac mid-block, too</li>
-        </ul>
-      </div>
-      <div class="stack">
-        <div class="shot"><img src="images/focus-meeting.jpg" alt="A meeting card starting in 1 minute that asks where you were, with Join and Not now" loading="lazy" width="1120" height="390"></div>
-        <div class="shot"><img src="images/focus-resume.jpg" alt="A card saying Back to the pricing page, next step Add the annual price row, 34 minutes left" loading="lazy" width="1120" height="270"></div>
-      </div>
-    </div>
-    <div class="feature">
-      <div class="copy">
-        <span class="tag">Plan &amp; wrap up</span>
-        <h3>Start and end the day on purpose.</h3>
-        <p>Each morning, one question: what would make today a win? Your answer stays on Home with a Focus button. At the end of the day, a short wrap-up shows what got done, then Hatch goes quiet until morning.</p>
-        <ul>
-          <li>Wrap up any time, or let Hatch offer it at 18:00 on weekdays</li>
-          <li>Set tomorrow's One Thing before you leave</li>
-        </ul>
-      </div>
-      <div class="stack">
-        <div class="shot"><img src="images/focus-plan.jpg" alt="A card asking what would make today a win, with to-dos to pick from" loading="lazy" width="1120" height="420"></div>
-        <div class="shot"><img src="images/focus-wrap.jpg" alt="A wrap-up card showing hours focused, to-dos done and still open, and a field for tomorrow's One Thing" loading="lazy" width="1120" height="420"></div>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="panels">
+        <article class="panel active" id="panel-focus-time" role="tabpanel" data-feat="focus-time" tabindex="0" aria-label="Time you can see">
+          <span class="tag">Focus</span>
+          <h3>Time you can see.</h3>
+          <p>Start a 25, 50 or 90 minute block from Home or with <kbd>⌃</kbd><kbd>⌥</kbd><kbd>F</kbd>. A ring around the notch fills as time passes, with your task underneath. While you focus, Hatch holds its own alerts until the block ends.</p>
+          <ul>
+            <li>Your reminders and meetings still come through</li>
+            <li>Add 10 minutes, pause, or note your next step</li>
+            <li>Can switch a macOS Focus on and off with Shortcuts</li>
+          </ul>
+          <div class="stack">
+            <div class="shot"><img src="images/focus-closed.jpg" alt="The closed notch with a focus ring, 35 minutes left and the task name underneath" loading="lazy" width="880" height="192"></div>
+            <div class="shot"><img src="images/focus-block.jpg" alt="Hatch open during a focus block: a timer with 34 minutes left, a next step field, and the One Thing marked In focus" loading="lazy" width="1400" height="600"></div>
+          </div>
+        </article>
 
-<!-- 2. Never miss a thing -->
-<section class="cat" id="on-time">
-  <div class="wrap">
-    <div class="cat-head">
-      <span class="eyebrow">Never miss a thing</span>
-      <h2>On time, <span class="grad">without trying.</span></h2>
-      <p>Meetings, reminders and to-dos, right where you look a hundred times a day.</p>
-    </div>
-    <div class="feature">
-      <div class="copy">
-        <span class="tag">Meetings</span>
-        <h3>Join in one click.</h3>
-        <p>Hatch reads today's calendar and finds the meeting link for you, even when it's buried in the notes or wrapped in an Outlook safe link. A minute before, a Join card drops down; during the call, the notch shows the minutes left.</p>
-        <ul>
-          <li>Zoom, Google Meet, Teams, Webex, Slack huddles, FaceTime and more</li>
-          <li>Countdown beside the camera before each meeting</li>
-          <li>Turns orange in the last five minutes, so you end on time</li>
-        </ul>
-      </div>
-      <div class="stack">
-        <div class="shot"><img src="images/live-meeting.jpg" alt="Closed notch showing a calendar icon and 'in 4m' before a meeting" loading="lazy" width="880" height="192"></div>
-        <div class="shot"><img src="images/focus-home.jpg" alt="Hatch's Home with Today's One Thing, upcoming meetings with Join buttons and a Wrap up button" loading="lazy" width="1400" height="600"></div>
-      </div>
-    </div>
-    <div class="feature flip">
-      <div class="copy">
-        <span class="tag">To-dos &amp; reminders</span>
-        <h3>Reminders you can't ignore.</h3>
-        <p>When a to-do is due, the notch drops down, shakes and chimes until you snooze it, finish it or delete it. Add to-dos from any app with <kbd>⌃</kbd><kbd>⌥</kbd><kbd>N</kbd>: type “call the bank tomorrow 5pm” and the reminder is set for you.</p>
-        <ul>
-          <li>Several reminders per to-do, just like Calendar</li>
-          <li>Snooze for 5 minutes to an hour</li>
-          <li>Strike items off, then archive them</li>
-        </ul>
-      </div>
-      <div class="stack">
-        <div class="shot"><img src="images/reminder.jpg" alt="A reminder alert dropping down from the notch with Snooze, Done and Delete" loading="lazy" width="1040" height="300"></div>
-        <div class="shot"><img src="images/focus-capture.jpg" alt="The quick capture card for typing a new to-do" loading="lazy" width="1120" height="250"></div>
-        <div class="shot"><img src="images/open-todos.jpg" alt="The to-do list with due times and reminders" loading="lazy" width="1400" height="600"></div>
-      </div>
-    </div>
-  </div>
-</section>
+        <article class="panel" id="panel-focus-resume" role="tabpanel" data-feat="focus-resume" tabindex="0" aria-label="Pick up where you left off">
+          <span class="tag">Resume</span>
+          <h3>Pick up exactly where you left off.</h3>
+          <p>When a meeting starts mid-block, its card asks where you were. One line is enough. When the meeting ends, Hatch hands your note back, with the time you had left.</p>
+          <ul>
+            <li>No extra card: the meeting card just gains one field</li>
+            <li>Works when you lock your Mac mid-block, too</li>
+          </ul>
+          <div class="stack">
+            <div class="shot"><img src="images/focus-meeting.jpg" alt="A meeting card starting in 1 minute that asks where you were, with Join and Not now" loading="lazy" width="1120" height="390"></div>
+            <div class="shot"><img src="images/focus-resume.jpg" alt="A card saying Back to the pricing page, next step Add the annual price row, 34 minutes left" loading="lazy" width="1120" height="270"></div>
+          </div>
+        </article>
 
-<!-- 3. Music -->
-<section class="cat" id="music">
-  <div class="wrap">
-    <div class="cat-head">
-      <span class="eyebrow">At a glance · stocks new in 0.11</span>
-      <h2>Alive, even <span class="grad">when closed.</span></h2>
-      <p>The black strip around your camera is no longer wasted. Each side shows its own thing: what's playing, a meeting countdown, or your stocks.</p>
-    </div>
-    <div class="feature">
-      <div class="copy">
-        <span class="tag">Now playing</span>
-        <h3>Every player, one place.</h3>
-        <p>Apple Music, Spotify, and YouTube or any video in Safari, Chrome, Brave, Edge and Arc. See the artwork, scrub the timeline, and skip without switching apps.</p>
-        <ul>
-          <li>Live, time-synced lyrics under the notch, filling in word by word</li>
-          <li>Move your pointer near and the lyrics slide out of the way</li>
-          <li>Follows whatever is actually playing</li>
-        </ul>
-      </div>
-      <div class="stack">
-        <div class="shot"><img src="images/live-music.jpg" alt="Closed notch showing album art, animated bars and a lyric line filling in as it's sung" loading="lazy" width="880" height="192"></div>
-        <div class="shot"><img src="images/open-home.jpg" alt="Media card with artwork, scrubber, controls and the current lyric line" loading="lazy" width="1400" height="600"></div>
-      </div>
-    </div>
-    <div class="feature flip">
-      <div class="copy">
-        <span class="tag">Stocks</span>
-        <h3>Your watchlist, beside the camera.</h3>
-        <p>Add the stocks and indices you follow, from AAPL to RELIANCE or the NIFTY 50. Two show beside the camera with the price and today's change, then slide up to the next pair. When a meeting or a song needs one side, your tickers keep going on the other.</p>
-        <ul>
-          <li>Wider, never taller: the notch keeps its height</li>
-          <li>Hover to hold still, click to open the chart in TradingView, Google Finance or Yahoo</li>
-          <li>Open Hatch for your whole watchlist with today's price lines</li>
-        </ul>
-      </div>
-      <div class="stack">
-        <div class="shot"><img src="images/stocks-wings.jpg" alt="The closed notch showing AAPL on the left and TSLA on the right, with prices and changes" loading="lazy" width="1120" height="192"></div>
-        <div class="shot"><img src="images/stocks-share.jpg" alt="The closed notch with AAPL on the left and a meeting countdown on the right" loading="lazy" width="1120" height="192"></div>
-        <div class="shot"><img src="images/stocks-watchlist.jpg" alt="Hatch open with a watchlist row of four tickers along the bottom" loading="lazy" width="1400" height="620"></div>
-      </div>
-    </div>
-  </div>
-</section>
+        <article class="panel" id="panel-focus-plan" role="tabpanel" data-feat="focus-plan" tabindex="0" aria-label="Plan and wrap up the day">
+          <span class="tag">Plan &amp; wrap up</span>
+          <h3>Start and end the day on purpose.</h3>
+          <p>Each morning, one question: what would make today a win? Your answer stays on Home with a Focus button. At the end of the day, a short wrap-up shows what got done, then Hatch goes quiet until morning.</p>
+          <ul>
+            <li>Wrap up any time, or let Hatch offer it at 18:00 on weekdays</li>
+            <li>Set tomorrow's One Thing before you leave</li>
+          </ul>
+          <div class="stack">
+            <div class="shot"><img src="images/focus-plan.jpg" alt="A card asking what would make today a win, with to-dos to pick from" loading="lazy" width="1120" height="420"></div>
+            <div class="shot"><img src="images/focus-wrap.jpg" alt="A wrap-up card showing hours focused, to-dos done and still open, and a field for tomorrow's One Thing" loading="lazy" width="1120" height="420"></div>
+          </div>
+        </article>
 
-<!-- 4. Smart helpers -->
-<section class="cat" id="helpers">
-  <div class="wrap">
-    <div class="cat-head">
-      <span class="eyebrow">Smart helpers · new in 0.10</span>
-      <h2>It notices, <span class="grad">so you don't have to.</span></h2>
-      <p>Small moments where Hatch sees what you need a second before you do. All of it runs on your Mac.</p>
-    </div>
-    <div class="feature">
-      <div class="copy">
-        <span class="tag">Smart Copy</span>
-        <h3>Copy it. Hatch handles the rest.</h3>
-        <p>Copy “send the deck to Priya tomorrow at 4:30” from Slack or an email, and before you've switched apps the notch offers to remind you or add it to your calendar. Copy a flight number, an address or a phone number and get flight status, Maps or a call in one click.</p>
-        <ul>
-          <li>Understands times, dates, flights, addresses and phone numbers</li>
-          <li>Leaves on its own after a few seconds if you don't need it</li>
-          <li>Reads only what you copy, on your Mac, the moment you copy it</li>
-        </ul>
-      </div>
-      <div class="stack">
-        <div class="shot"><img src="images/smart-copy.jpg" alt="A card saying Copied a time: Tomorrow 16:30, with Remind me, Add to Calendar and Dismiss" loading="lazy" width="1120" height="280"></div>
-        <div class="shot"><img src="images/smart-flight.jpg" alt="A card for Flight AI 101 with a Flight status button" loading="lazy" width="1120" height="280"></div>
-      </div>
-    </div>
-    <div class="feature flip">
-      <div class="copy">
-        <span class="tag">Busy apps</span>
-        <h3>Know what's draining your Mac.</h3>
-        <p>Fans spinning, battery dropping? When an app keeps your Mac busy for minutes, or swallows a huge amount of memory, the notch gives a quick buzz and tells you which one, with a button to quit it.</p>
-        <ul>
-          <li>Adds up every helper process, so Chrome counts as Chrome</li>
-          <li>Ignores short spikes and never suggests quitting system parts</li>
-          <li>At most once an hour per app, or never again if you say so</li>
-        </ul>
-      </div>
-      <div class="shot"><img src="images/busy-app.jpg" alt="A card saying Google Chrome is working your Mac hard, 184% CPU for 3 minutes and 4.25 GB memory, with Quit, Activity Monitor and Not now" loading="lazy" width="1120" height="280"></div>
-    </div>
-    <div class="feature">
-      <div class="copy">
-        <span class="tag">Notes, files &amp; clipboard</span>
-        <h3>Notes that act, and a shelf for everything else.</h3>
-        <p>Start a line with #todo, or right-click any text, to turn it into a to-do. Mention a time and Hatch offers a reminder or a calendar event. Each day's notes can be kept in Apple Notes. Drag files onto the notch to park them, and get back anything you copied recently.</p>
-        <ul>
-          <li>#todo and right-click › Add to To-dos</li>
-          <li>One Apple Notes entry per day, saved as you type</li>
-          <li>Drop files on the notch; clipboard history stays in memory only</li>
-        </ul>
-      </div>
-      <div class="stack">
-        <div class="shot"><img src="images/notes-todo.jpg" alt="The Notes tab with checklist lines marked as to-dos and Save each day to Apple Notes ticked" loading="lazy" width="1400" height="600"></div>
-        <div class="shot"><img src="images/open-tray.jpg" alt="The file tray showing PDFs, an image, a zip and a Keynote file" loading="lazy" width="1400" height="600"></div>
+        <article class="panel" id="panel-meetings" role="tabpanel" data-feat="meetings" tabindex="0" aria-label="Join meetings in one click">
+          <span class="tag">Meetings</span>
+          <h3>Join in one click.</h3>
+          <p>Hatch reads today's calendar and finds the meeting link for you, even when it's buried in the notes or wrapped in an Outlook safe link. A minute before, a Join card drops down; during the call, the notch shows the minutes left.</p>
+          <ul>
+            <li>Zoom, Google Meet, Teams, Webex, Slack huddles, FaceTime and more</li>
+            <li>Countdown beside the camera before each meeting</li>
+            <li>Turns orange in the last five minutes, so you end on time</li>
+          </ul>
+          <div class="stack">
+            <div class="shot"><img src="images/live-meeting.jpg" alt="Closed notch showing a calendar icon and 'in 4m' before a meeting" loading="lazy" width="880" height="192"></div>
+            <div class="shot"><img src="images/focus-home.jpg" alt="Hatch's Home with Today's One Thing, upcoming meetings with Join buttons and a Wrap up button" loading="lazy" width="1400" height="600"></div>
+          </div>
+        </article>
+
+        <article class="panel" id="panel-reminders" role="tabpanel" data-feat="reminders" tabindex="0" aria-label="Reminders you can't ignore">
+          <span class="tag">To-dos &amp; reminders</span>
+          <h3>Reminders you can't ignore.</h3>
+          <p>When a to-do is due, the notch drops down, shakes and chimes until you snooze it, finish it or delete it. Add to-dos from any app with <kbd>⌃</kbd><kbd>⌥</kbd><kbd>N</kbd>: type “call the bank tomorrow 5pm” and the reminder is set for you.</p>
+          <ul>
+            <li>Several reminders per to-do, just like Calendar</li>
+            <li>Snooze for 5 minutes to an hour</li>
+            <li>Strike items off, then archive them</li>
+          </ul>
+          <div class="stack">
+            <div class="shot"><img src="images/reminder.jpg" alt="A reminder alert dropping down from the notch with Snooze, Done and Delete" loading="lazy" width="1040" height="300"></div>
+            <div class="shot"><img src="images/focus-capture.jpg" alt="The quick capture card for typing a new to-do" loading="lazy" width="1120" height="250"></div>
+            <div class="shot"><img src="images/open-todos.jpg" alt="The to-do list with due times and reminders" loading="lazy" width="1400" height="600"></div>
+          </div>
+        </article>
+
+        <article class="panel" id="panel-music" role="tabpanel" data-feat="music" tabindex="0" aria-label="Now playing and live lyrics">
+          <span class="tag">Now playing</span>
+          <h3>Every player, one place.</h3>
+          <p>Apple Music, Spotify, and YouTube or any video in Safari, Chrome, Brave, Edge and Arc. See the artwork, scrub the timeline, and skip without switching apps.</p>
+          <ul>
+            <li>Live, time-synced lyrics under the notch, filling in word by word</li>
+            <li>Move your pointer near and the lyrics slide out of the way</li>
+            <li>Follows whatever is actually playing</li>
+          </ul>
+          <div class="stack">
+            <div class="shot"><img src="images/live-music.jpg" alt="Closed notch showing album art, animated bars and a lyric line filling in as it's sung" loading="lazy" width="880" height="192"></div>
+            <div class="shot"><img src="images/open-home.jpg" alt="Media card with artwork, scrubber, controls and the current lyric line" loading="lazy" width="1400" height="600"></div>
+          </div>
+        </article>
+
+        <article class="panel" id="panel-stocks" role="tabpanel" data-feat="stocks" tabindex="0" aria-label="Your stock watchlist">
+          <span class="tag">Stocks</span>
+          <h3>Your watchlist, beside the camera.</h3>
+          <p>Add the stocks and indices you follow, from AAPL to RELIANCE or the NIFTY 50. Two show beside the camera with the price and today's change, then slide up to the next pair. When a meeting or a song needs one side, your tickers keep going on the other.</p>
+          <ul>
+            <li>Wider, never taller: the notch keeps its height</li>
+            <li>Hover to hold still, click to open the chart in TradingView, Google Finance or Yahoo</li>
+            <li>Open Hatch for your whole watchlist with today's price lines</li>
+          </ul>
+          <div class="stack">
+            <div class="shot"><img src="images/stocks-wings.jpg" alt="The closed notch showing AAPL on the left and TSLA on the right, with prices and changes" loading="lazy" width="1120" height="192"></div>
+            <div class="shot"><img src="images/stocks-share.jpg" alt="The closed notch with AAPL on the left and a meeting countdown on the right" loading="lazy" width="1120" height="192"></div>
+            <div class="shot"><img src="images/stocks-watchlist.jpg" alt="Hatch open with a watchlist row of four tickers along the bottom" loading="lazy" width="1400" height="620"></div>
+          </div>
+        </article>
+
+        <article class="panel" id="panel-smartcopy" role="tabpanel" data-feat="smartcopy" tabindex="0" aria-label="Smart Copy">
+          <span class="tag">Smart Copy</span>
+          <h3>Copy it. Hatch handles the rest.</h3>
+          <p>Copy “send the deck to Priya tomorrow at 4:30” from Slack or an email, and before you've switched apps the notch offers to remind you or add it to your calendar. Copy a flight number, an address or a phone number and get flight status, Maps or a call in one click.</p>
+          <ul>
+            <li>Understands times, dates, flights, addresses and phone numbers</li>
+            <li>Leaves on its own after a few seconds if you don't need it</li>
+            <li>Reads only what you copy, on your Mac, the moment you copy it</li>
+          </ul>
+          <div class="stack">
+            <div class="shot"><img src="images/smart-copy.jpg" alt="A card saying Copied a time: Tomorrow 16:30, with Remind me, Add to Calendar and Dismiss" loading="lazy" width="1120" height="280"></div>
+            <div class="shot"><img src="images/smart-flight.jpg" alt="A card for Flight AI 101 with a Flight status button" loading="lazy" width="1120" height="280"></div>
+          </div>
+        </article>
+
+        <article class="panel" id="panel-busy" role="tabpanel" data-feat="busy" tabindex="0" aria-label="Know what's draining your Mac">
+          <span class="tag">Busy apps</span>
+          <h3>Know what's draining your Mac.</h3>
+          <p>Fans spinning, battery dropping? When an app keeps your Mac busy for minutes, or swallows a huge amount of memory, the notch gives a quick buzz and tells you which one, with a button to quit it.</p>
+          <ul>
+            <li>Adds up every helper process, so Chrome counts as Chrome</li>
+            <li>Ignores short spikes and never suggests quitting system parts</li>
+            <li>At most once an hour per app, or never again if you say so</li>
+          </ul>
+          <div class="stack">
+            <div class="shot"><img src="images/busy-app.jpg" alt="A card saying Google Chrome is working your Mac hard, 184% CPU for 3 minutes and 4.25 GB memory, with Quit, Activity Monitor and Not now" loading="lazy" width="1120" height="280"></div>
+          </div>
+        </article>
+
+        <article class="panel" id="panel-notes" role="tabpanel" data-feat="notes" tabindex="0" aria-label="Notes, files and clipboard">
+          <span class="tag">Notes, files &amp; clipboard</span>
+          <h3>Notes that act, and a shelf for everything else.</h3>
+          <p>Start a line with #todo, or right-click any text, to turn it into a to-do. Mention a time and Hatch offers a reminder or a calendar event. Each day's notes can be kept in Apple Notes. Drag files onto the notch to park them, and get back anything you copied recently.</p>
+          <ul>
+            <li>#todo and right-click › Add to To-dos</li>
+            <li>One Apple Notes entry per day, saved as you type</li>
+            <li>Drop files on the notch; clipboard history stays in memory only</li>
+          </ul>
+          <div class="stack">
+            <div class="shot"><img src="images/notes-todo.jpg" alt="The Notes tab with checklist lines marked as to-dos and Save each day to Apple Notes ticked" loading="lazy" width="1400" height="600"></div>
+            <div class="shot"><img src="images/open-tray.jpg" alt="The file tray showing PDFs, an image, a zip and a Keynote file" loading="lazy" width="1400" height="600"></div>
+          </div>
+        </article>
+
+        <article class="panel" id="panel-keyboard" role="tabpanel" data-feat="keyboard" tabindex="0" aria-label="Keyboard sounds">
+          <span class="tag">Keyboard sounds · Pro</span>
+          <h3>Give your keyboard a voice.</h3>
+          <p>Turn on a soft, satisfying click for every keystroke, played right through your Mac's speakers. Pick from quirky, professional, ambient and classic mechanical-switch sounds — the famous blues, browns and more — tuned so Space and Return feel heavier than the rest.</p>
+          <ul>
+            <li>Four families: Quirky, Professional, Ambient and Mechanical switches</li>
+            <li>Low-latency audio that keeps up with fast typing</li>
+            <li>Nothing you type is ever recorded, stored or sent anywhere</li>
+            <li>Part of Hatch Pro — free during early access</li>
+          </ul>
+          <div class="kbd-art">
+            <svg viewBox="0 0 760 240" role="img" aria-label="Five keycaps spelling HATCH with sound waves coming off the last key">
+              <defs>
+                <linearGradient id="kcap" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#2b2b3a"/><stop offset="1" stop-color="#191922"/>
+                </linearGradient>
+                <linearGradient id="kcapOn" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ff9e82"/><stop offset="1" stop-color="#ff7a59"/>
+                </linearGradient>
+              </defs>
+              <!-- sound waves off the last key -->
+              <g fill="none" stroke="#ff7a59" stroke-width="3.5" stroke-linecap="round">
+                <path d="M612 92 a40 40 0 0 1 0 72" opacity="0.85"/>
+                <path d="M634 70 a70 70 0 0 1 0 116" opacity="0.5"/>
+                <path d="M656 50 a100 100 0 0 1 0 156" opacity="0.26"/>
+              </g>
+              <!-- keycaps spelling HATCH; last one pressed -->
+              <g font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="700" font-size="26" text-anchor="middle">
+                <g>
+                  <rect x="150" y="86" width="74" height="74" rx="14" fill="url(#kcap)" stroke="rgba(255,255,255,0.09)"/>
+                  <text x="187" y="132" fill="#e9e9f2">H</text>
+                </g>
+                <g>
+                  <rect x="240" y="86" width="74" height="74" rx="14" fill="url(#kcap)" stroke="rgba(255,255,255,0.09)"/>
+                  <text x="277" y="132" fill="#e9e9f2">A</text>
+                </g>
+                <g>
+                  <rect x="330" y="86" width="74" height="74" rx="14" fill="url(#kcap)" stroke="rgba(255,255,255,0.09)"/>
+                  <text x="367" y="132" fill="#e9e9f2">T</text>
+                </g>
+                <g>
+                  <rect x="420" y="86" width="74" height="74" rx="14" fill="url(#kcap)" stroke="rgba(255,255,255,0.09)"/>
+                  <text x="457" y="132" fill="#e9e9f2">C</text>
+                </g>
+                <g>
+                  <rect x="510" y="94" width="74" height="74" rx="14" fill="url(#kcapOn)"/>
+                  <text x="547" y="140" fill="#2a0f06">H</text>
+                </g>
+              </g>
+            </svg>
+            <div class="kbd-chips"><span>Quirky</span><span>Professional</span><span>Ambient</span><span>Mechanical</span></div>
+          </div>
+        </article>
       </div>
     </div>
   </div>
@@ -669,7 +730,7 @@
       <div class="card">
         <div class="icon">🔍</div>
         <h4>Checked by antivirus engines</h4>
-        <p>Every release is uploaded to VirusTotal, where dozens of antivirus engines check it. <a href="https://www.virustotal.com/gui/file/988952b9d4a35109cb729a4008686a723c442cfb18ba8f4536c10a72bf84f242">See the report for this version</a>.</p>
+        <p>Every release is uploaded to VirusTotal, where dozens of antivirus engines check it. <a href="https://www.virustotal.com/gui/file/f90365fe6b15f24421f2d223eeeb67702dd02a189fe7c654fe601347e9e9585e">See the report for this version</a>.</p>
       </div>
       <div class="card">
         <div class="icon">🔐</div>
@@ -680,8 +741,8 @@
     <div class="verify">
       <div>
         <strong>Verify your download</strong>
-        <p>Hatch <!--version-->0.13.1<!--/version--> · Hatch.dmg · SHA-256. In Terminal, run the command below and check that it prints this exact value.</p>
-        <code class="hash"><!--sha256-->988952b9d4a35109cb729a4008686a723c442cfb18ba8f4536c10a72bf84f242<!--/sha256--></code>
+        <p>Hatch <!--version-->0.14.0<!--/version--> · Hatch.dmg · SHA-256. In Terminal, run the command below and check that it prints this exact value.</p>
+        <code class="hash"><!--sha256-->f90365fe6b15f24421f2d223eeeb67702dd02a189fe7c654fe601347e9e9585e<!--/sha256--></code>
         <code>shasum -a 256 ~/Downloads/Hatch.dmg</code>
       </div>
       <div>
@@ -793,6 +854,39 @@
         demoTimer = setTimeout(() => { if (!touched) setOpen(false); }, 3200);
       }, 1600);
     }
+  })();
+
+  // Feature explorer: clicking a thread item slides in its panel.
+  (() => {
+    const items = [...document.querySelectorAll(".thread-item")];
+    const panels = [...document.querySelectorAll(".panel")];
+    if (!items.length) return;
+    const isMobile = () => matchMedia("(max-width: 860px)").matches;
+    const select = (id, scroll) => {
+      items.forEach(i => {
+        const on = i.dataset.feat === id;
+        i.classList.toggle("active", on);
+        i.setAttribute("aria-selected", String(on));
+      });
+      panels.forEach(p => p.classList.toggle("active", p.dataset.feat === id));
+      if (scroll && isMobile()) {
+        const p = panels.find(p => p.dataset.feat === id);
+        if (p) p.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+    items.forEach((item) => {
+      item.addEventListener("click", () => select(item.dataset.feat, true));
+      item.addEventListener("keydown", (e) => {
+        const idx = items.indexOf(item);
+        if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+          e.preventDefault();
+          const n = items[(idx + 1) % items.length]; n.focus(); select(n.dataset.feat);
+        } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+          e.preventDefault();
+          const n = items[(idx - 1 + items.length) % items.length]; n.focus(); select(n.dataset.feat);
+        }
+      });
+    });
   })();
 </script>
 
